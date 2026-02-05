@@ -107,21 +107,13 @@ export function BuyModule() {
         <div className="flex gap-2 sm:gap-3 mb-4 sm:mb-6">
           <button
             onClick={() => setMode("wallet")}
-            className={`flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
-              mode === "wallet"
-                ? "bg-base-blue text-white"
-                : "bg-dark-200 text-gray-400 hover:bg-dark-100"
-            }`}
+            className="flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all bg-base-blue text-white"
           >
             Connect Wallet
           </button>
           <button
             onClick={() => setMode("manual")}
-            className={`flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
-              mode === "manual"
-                ? "bg-base-blue text-white"
-                : "bg-dark-200 text-gray-400 hover:bg-dark-100"
-            }`}
+            className="flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all bg-dark-200 text-gray-400 hover:bg-dark-100"
           >
             Manual Purchase
           </button>
@@ -176,21 +168,13 @@ export function BuyModule() {
         <div className="flex gap-2 sm:gap-3 mb-4 sm:mb-6">
           <button
             onClick={() => setMode("wallet")}
-            className={`flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
-              mode === "wallet"
-                ? "bg-base-blue text-white"
-                : "bg-dark-200 text-gray-400 hover:bg-dark-100"
-            }`}
+            className="flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all bg-dark-200 text-gray-400 hover:bg-dark-100"
           >
             Connect Wallet
           </button>
           <button
             onClick={() => setMode("manual")}
-            className={`flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
-              mode === "manual"
-                ? "bg-base-blue text-white"
-                : "bg-dark-200 text-gray-400 hover:bg-dark-100"
-            }`}
+            className="flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all bg-base-blue text-white"
           >
             Manual Purchase
           </button>
@@ -299,21 +283,13 @@ export function BuyModule() {
       <div className="flex gap-2 sm:gap-3 mb-4 sm:mb-6">
         <button
           onClick={() => setMode("wallet")}
-          className={`flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
-            mode === "wallet"
-              ? "bg-base-blue text-white"
-              : "bg-dark-200 text-gray-400 hover:bg-dark-100"
-          }`}
+          className="flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all bg-base-blue text-white"
         >
           Connect Wallet
         </button>
         <button
           onClick={() => setMode("manual")}
-          className={`flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all ${
-            mode === "manual"
-              ? "bg-base-blue text-white"
-              : "bg-dark-200 text-gray-400 hover:bg-dark-100"
-          }`}
+          className="flex-1 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-semibold transition-all bg-dark-200 text-gray-400 hover:bg-dark-100"
         >
           Manual Purchase
         </button>
