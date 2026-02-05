@@ -30,7 +30,7 @@ export function BuyModule() {
   if (!SALE_IS_LIVE) {
     return (
       <div className="bg-gradient-to-br from-base-blue/10 to-accent-500/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-base-blue/30 opacity-60 pointer-events-none">
-        <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy {PROJECT_CONFIG.TOKEN_SYMBOL}</h3>
+        <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy Token</h3>
         <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
           TGE Price: TBD • Pay with USDC or ETH • Network: {PROJECT_CONFIG.NETWORK}
         </p>
@@ -79,7 +79,7 @@ export function BuyModule() {
 
         {/* Estimated Tokens - Disabled */}
         <div className="bg-dark-200/50 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6">
-          <p className="text-xs sm:text-sm text-gray-500 mb-1">Estimated {PROJECT_CONFIG.TOKEN_SYMBOL}</p>
+          <p className="text-xs sm:text-sm text-gray-500 mb-1">Estimated Tokens</p>
           <p className="text-xl sm:text-2xl font-bold text-gray-600">0.00</p>
         </div>
 
@@ -98,7 +98,7 @@ export function BuyModule() {
   if (mode === "wallet" && !isConnected) {
     return (
       <div className="bg-gradient-to-br from-base-blue/10 to-accent-500/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-base-blue/30">
-        <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy {PROJECT_CONFIG.TOKEN_SYMBOL}</h3>
+        <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy Token</h3>
         <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
           TGE Price: {PROJECT_CONFIG.TGE_PRICE} • Pay with USDC or ETH • Network: {PROJECT_CONFIG.NETWORK}
         </p>
@@ -137,7 +137,7 @@ export function BuyModule() {
   if (mode === "wallet" && isWrongNetwork) {
     return (
       <div className="bg-gradient-to-br from-base-blue/10 to-accent-500/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-base-blue/30">
-        <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy {PROJECT_CONFIG.TOKEN_SYMBOL}</h3>
+        <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy Token</h3>
 
         <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
           <h4 className="font-bold text-yellow-400 mb-2 text-sm sm:text-base">Switch network</h4>
@@ -159,7 +159,7 @@ export function BuyModule() {
   if (mode === "manual") {
     return (
       <div className="bg-gradient-to-br from-base-blue/10 to-accent-500/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-base-blue/30">
-        <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy {PROJECT_CONFIG.TOKEN_SYMBOL}</h3>
+        <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy Token</h3>
         <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
           TGE Price: {PROJECT_CONFIG.TGE_PRICE} • Pay with USDC or ETH • Network: {PROJECT_CONFIG.NETWORK}
         </p>
@@ -240,7 +240,7 @@ export function BuyModule() {
 
         {/* Estimated Tokens */}
         <div className="bg-dark-200/50 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6">
-          <p className="text-xs sm:text-sm text-gray-400 mb-1">Estimated {PROJECT_CONFIG.TOKEN_SYMBOL}</p>
+          <p className="text-xs sm:text-sm text-gray-400 mb-1">Estimated Tokens</p>
           <p className="text-xl sm:text-2xl font-bold text-white">{estimatedTokens}</p>
         </div>
 
@@ -274,7 +274,7 @@ export function BuyModule() {
   // Ready to Buy State (Wallet Connected)
   return (
     <div className="bg-gradient-to-br from-base-blue/10 to-accent-500/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-base-blue/30">
-      <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy {PROJECT_CONFIG.TOKEN_SYMBOL}</h3>
+      <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy Token</h3>
       <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
         TGE Price: {PROJECT_CONFIG.TGE_PRICE} • Pay with USDC or ETH • Network: {PROJECT_CONFIG.NETWORK}
       </p>
@@ -344,7 +344,7 @@ export function BuyModule() {
 
       {/* Estimated Tokens */}
       <div className="bg-dark-200/50 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6">
-        <p className="text-xs sm:text-sm text-gray-400 mb-1">Estimated {PROJECT_CONFIG.TOKEN_SYMBOL}</p>
+        <p className="text-xs sm:text-sm text-gray-400 mb-1">Estimated Tokens</p>
         <p className="text-xl sm:text-2xl font-bold text-white">{estimatedTokens}</p>
       </div>
 

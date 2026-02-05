@@ -37,7 +37,7 @@ export function VideoBackground() {
         autoPlay
         preload="auto"
       >
-        <source src="/videos/omnigraf-intro.mov" type="video/mp4" />
+        <source src="/videos/omnigraf-intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

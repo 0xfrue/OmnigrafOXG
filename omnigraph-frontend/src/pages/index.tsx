@@ -29,7 +29,7 @@ export default function Home() {
 
           {/* Centered Logo */}
           <div className="flex justify-center mb-8 md:mb-10">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-base-blue/50 ring-4 ring-base-blue/30">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-base-blue/50 ring-4 ring-base-blue/30 morph-border pulse-ring magnetic-hover glow-base">
               <img
                 src="/omnigraf-logo.png"
                 alt="Omnigraf Logo"
@@ -59,6 +59,15 @@ export default function Home() {
           <p className="text-gray-300 text-xl sm:text-2xl md:text-4xl max-w-5xl mx-auto mb-6 md:mb-8 font-semibold leading-relaxed px-4">
             <span className="text-base-blue">Token Coming Soon to Base.</span>
           </p>
+
+          {/* Join Whitelist CTA - Primary */}
+          <div className="flex justify-center mb-12">
+            <Link href="#whitelist">
+              <button className="px-8 py-4 md:px-12 md:py-5 bg-gradient-to-r from-base-blue via-purple-500 to-cyan-500 rounded-2xl font-bold text-base md:text-lg shadow-2xl shadow-base-blue/50 hover:-translate-y-2 liquid-button magnetic-hover ripple transition-all duration-300 hover:shadow-base-blue/70">
+                Join Whitelist
+              </button>
+            </Link>
+          </div>
 
           {/* 3D Feature Cards */}
           <div className="max-w-5xl mx-auto mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -98,7 +107,7 @@ export default function Home() {
               disabled
               className="px-6 py-3 md:px-10 md:py-5 bg-gray-600 rounded-2xl font-bold text-sm md:text-lg text-gray-400 cursor-not-allowed opacity-50"
             >
-              🚀 Buy {PROJECT_CONFIG.TOKEN_SYMBOL} — Coming Soon
+              🚀 Buy Token — Coming Soon
             </button>
             <Link href="#whitelist">
               <button className="px-6 py-3 md:px-10 md:py-5 glass-card border-2 border-base-blue/50 hover:border-base-blue rounded-2xl font-bold text-sm md:text-lg transition-all duration-500 hover:-translate-y-2 magnetic-hover">
@@ -123,7 +132,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               { title: "Energy & Power", icon: "⚡" },
               { title: "Electronics", icon: "💻" },
@@ -132,7 +141,7 @@ export default function Home() {
               { title: "Water Tech", icon: "💧" },
               { title: "Industrial", icon: "🏭" },
             ].map((item, i) => (
-              <div key={i} className="glass-card rounded-3xl p-8 card-3d shimmer group cursor-pointer">
+              <div key={i} className="glass-card rounded-3xl p-8 card-3d shimmer group cursor-pointer text-center">
                 <div className="text-6xl mb-4 scale-pulse">{item.icon}</div>
                 <h3 className="font-bold text-2xl group-hover:text-base-blue transition-colors">{item.title}</h3>
                 <div className="mt-4 w-full h-1 bg-gradient-to-r from-base-blue to-accent-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -165,16 +174,16 @@ export default function Home() {
 
           <div className="glass-card rounded-3xl p-10 max-w-5xl mx-auto">
             <h3 className="font-bold text-2xl mb-6 text-center gradient-text">Four-Pillar Engine</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
                 { icon: "💧", title: "Liquidity" },
                 { icon: "🏦", title: "Treasury (30%)" },
                 { icon: "🔥", title: "Burns (capped)" },
                 { icon: "🎁", title: "Rewards" },
               ].map((item, i) => (
-                <div key={i} className="bg-dark-200/50 rounded-xl p-6 hover:bg-dark-200/70 transition-all">
-                  <span className="text-4xl">{item.icon}</span>
-                  <h4 className="font-bold text-lg mt-2">{item.title}</h4>
+                <div key={i} className="bg-dark-200/50 rounded-xl p-6 hover:bg-dark-200/70 transition-all text-center">
+                  <span className="text-4xl block mb-2">{item.icon}</span>
+                  <h4 className="font-bold text-lg">{item.title}</h4>
                 </div>
               ))}
             </div>
@@ -183,7 +192,7 @@ export default function Home() {
 
         {/* BUY MODULE */}
         <section className="my-16 md:my-24" id="buy">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center gradient-text neon-base px-4">Get {PROJECT_CONFIG.TOKEN_SYMBOL}</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center gradient-text neon-base px-4">Get Token</h2>
           <div className="max-w-3xl mx-auto">
             <BuyModule />
           </div>

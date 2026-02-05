@@ -4,7 +4,7 @@
 export const PROJECT_CONFIG = {
   // Project Identity
   PROJECT_NAME: "Graphene Token",
-  TOKEN_SYMBOL: "GRAF",
+  TOKEN_SYMBOL: "TBD",
   PARENT_COMPANY: "ResolutX (formerly NorCalBio)",
 
   // Network
@@ -95,11 +95,11 @@ export const PLACEHOLDERS = {
 
 // Compliance text
 export const COMPLIANCE = {
-  RISK_DISCLOSURE: "Crypto assets are high-risk and volatile. GRAF does not guarantee profit, returns, or price appreciation. Please review eligibility and risks before participating.",
+  RISK_DISCLOSURE: "Crypto assets are high-risk and volatile. This token does not guarantee profit, returns, or price appreciation. Please review eligibility and risks before participating.",
 
   FOOTER_DISCLOSURE: "This website is for informational purposes only and does not constitute financial advice, legal advice, or an offer where prohibited. Crypto assets are volatile and high-risk. Participation may be restricted by jurisdiction and may require verification.",
 
   LIQUIDITY_SUPPORT: "Ecosystem participants may choose to contribute liquidity over time to support a healthy token economy. Contributions are discretionary and not guaranteed.",
 
-  NO_INVESTMENT: "GRAF is not a guarantee of profit or returns. Crypto assets are volatile and high-risk. No returns are promised.",
+  NO_INVESTMENT: "This token is not a guarantee of profit or returns. Crypto assets are volatile and high-risk. No returns are promised.",
 };
