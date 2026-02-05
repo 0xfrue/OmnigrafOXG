@@ -32,7 +32,7 @@ export function BuyModule() {
       <div className="bg-gradient-to-br from-base-blue/10 to-accent-500/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-base-blue/30 opacity-60 pointer-events-none">
         <h3 className="text-xl sm:text-2xl font-bold mb-2">Buy {PROJECT_CONFIG.TOKEN_SYMBOL}</h3>
         <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
-          TGE Price: {PROJECT_CONFIG.TGE_PRICE} • Pay with USDC or ETH • Network: {PROJECT_CONFIG.NETWORK}
+          TGE Price: TBD • Pay with USDC or ETH • Network: {PROJECT_CONFIG.NETWORK}
         </p>
 
         {/* Mode Toggle - Disabled */}

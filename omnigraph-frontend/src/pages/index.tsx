@@ -31,7 +31,7 @@ export default function Home() {
           <div className="flex justify-center mb-8 md:mb-10">
             <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-base-blue/50 ring-4 ring-base-blue/30">
               <img
-                src="/omnigraf-logo.jpg"
+                src="/omnigraf-logo.png"
                 alt="Omnigraf Logo"
                 className="w-full h-full object-contain"
               />
@@ -75,10 +75,10 @@ export default function Home() {
           </div>
 
           {/* Price */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-12">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-6">
             <div className="glass-card px-8 py-4 rounded-2xl pulse-ring">
               <span className="text-gray-400 text-sm block mb-1">TGE Price</span>
-              <span className="font-bold text-4xl gradient-text">{PROJECT_CONFIG.TGE_PRICE}</span>
+              <span className="font-bold text-4xl gradient-text">TBD</span>
             </div>
             <div className="hidden md:block text-4xl text-gray-600">•</div>
             <div className="glass-card px-8 py-4 rounded-2xl">
@@ -87,18 +87,19 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Countdown */}
-          <div className="mb-12">
-            <CountdownTimer targetDate={PROJECT_CONFIG.SALE_START_DATETIME} label="🚀 Sale launches in" />
-          </div>
+          {/* Launching Soon */}
+          <p className="text-center text-lg sm:text-xl md:text-2xl text-accent-400 font-semibold mb-12">
+            Launching Soon — Join Waitlist
+          </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap justify-center gap-3 md:gap-6 px-4">
-            <Link href="#buy">
-              <button className="px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-base-blue via-blue-600 to-accent-500 rounded-2xl font-bold text-sm md:text-lg shadow-2xl shadow-base-blue/50 hover:shadow-base-blue/70 transition-all duration-500 hover:-translate-y-2 liquid-button magnetic-hover">
-                🚀 Buy {PROJECT_CONFIG.TOKEN_SYMBOL} at {PROJECT_CONFIG.TGE_PRICE}
-              </button>
-            </Link>
+            <button
+              disabled
+              className="px-6 py-3 md:px-10 md:py-5 bg-gray-600 rounded-2xl font-bold text-sm md:text-lg text-gray-400 cursor-not-allowed opacity-50"
+            >
+              🚀 Buy {PROJECT_CONFIG.TOKEN_SYMBOL} — Coming Soon
+            </button>
             <Link href="#whitelist">
               <button className="px-6 py-3 md:px-10 md:py-5 glass-card border-2 border-base-blue/50 hover:border-base-blue rounded-2xl font-bold text-sm md:text-lg transition-all duration-500 hover:-translate-y-2 magnetic-hover">
                 ⭐ Join Whitelist

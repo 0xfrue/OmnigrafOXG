@@ -28,7 +28,7 @@ export function Header() {
           <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden shadow-lg shadow-base-blue/50 group-hover:shadow-xl group-hover:shadow-base-blue/70 transition-all duration-300 group-hover:scale-105 relative ring-2 ring-base-blue/30 group-hover:ring-base-blue/60 bg-transparent">
               <Image
-                src="/omnigraf-logo.jpg"
+                src="/omnigraf-logo.png"
                 alt="Graphene Token Logo"
                 width={48}
                 height={48}
