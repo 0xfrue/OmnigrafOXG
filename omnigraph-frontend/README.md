@@ -165,7 +165,7 @@ MIT
 
 ## Links
 
-- Website: [https://omnigrafoxg.io](https://omnigrafoxg.io) (update with actual URL)
+- Website: [https://omnigrafx.com](https://omnigrafx.com) (update with actual URL)
 - Discord: [https://discord.gg/omnigrafoxg](https://discord.gg/omnigrafoxg)
 - Twitter: [@omnigrafoxg](https://twitter.com/omnigrafoxg)
 - Docs: [https://docs.omnigrafoxg.io](https://docs.omnigrafoxg.io)
