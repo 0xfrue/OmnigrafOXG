@@ -4,45 +4,48 @@ import { stakingSingleABI, stakingLPABI, tokenABI, erc20ABI } from "@/contracts/
 import { parseUnits } from "viem";
 
 export function useStakingSingle(userAddress: `0x${string}` | undefined) {
+  const baseContracts = [
+    {
+      address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
+      abi: stakingSingleABI,
+      functionName: "totalSupply",
+    },
+    {
+      address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
+      abi: stakingSingleABI,
+      functionName: "rewardRate",
+    },
+    {
+      address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
+      abi: stakingSingleABI,
+      functionName: "periodFinish",
+    },
+    {
+      address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
+      abi: stakingSingleABI,
+      functionName: "estimatedAPR",
+    },
+  ] as const;
+
+  const userContracts = userAddress
+    ? ([
+        {
+          address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
+          abi: stakingSingleABI,
+          functionName: "balances",
+          args: [userAddress],
+        },
+        {
+          address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
+          abi: stakingSingleABI,
+          functionName: "earned",
+          args: [userAddress],
+        },
+      ] as const)
+    : [];
+
   const { data, isLoading, refetch } = useReadContracts({
-    contracts: [
-      {
-        address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
-        abi: stakingSingleABI,
-        functionName: "totalSupply" as const,
-      },
-      {
-        address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
-        abi: stakingSingleABI,
-        functionName: "rewardRate" as const,
-      },
-      {
-        address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
-        abi: stakingSingleABI,
-        functionName: "periodFinish" as const,
-      },
-      {
-        address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
-        abi: stakingSingleABI,
-        functionName: "estimatedAPR" as const,
-      },
-      ...(userAddress
-        ? [
-            {
-              address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
-              abi: stakingSingleABI,
-              functionName: "balances" as const,
-              args: [userAddress] as const,
-            },
-            {
-              address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
-              abi: stakingSingleABI,
-              functionName: "earned" as const,
-              args: [userAddress] as const,
-            },
-          ]
-        : []),
-    ],
+    contracts: [...baseContracts, ...userContracts],
   });
 
   return {
@@ -58,52 +61,55 @@ export function useStakingSingle(userAddress: `0x${string}` | undefined) {
 }
 
 export function useStakingLP(userAddress: `0x${string}` | undefined) {
+  const baseContracts = [
+    {
+      address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+      abi: stakingLPABI,
+      functionName: "totalSupply",
+    },
+    {
+      address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+      abi: stakingLPABI,
+      functionName: "rewardRate",
+    },
+    {
+      address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+      abi: stakingLPABI,
+      functionName: "estimatedAPR",
+    },
+  ] as const;
+
+  const userContracts = userAddress
+    ? ([
+        {
+          address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+          abi: stakingLPABI,
+          functionName: "balances",
+          args: [userAddress],
+        },
+        {
+          address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+          abi: stakingLPABI,
+          functionName: "earnedWithBonus",
+          args: [userAddress],
+        },
+        {
+          address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+          abi: stakingLPABI,
+          functionName: "qualifiesForBonus",
+          args: [userAddress],
+        },
+        {
+          address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+          abi: stakingLPABI,
+          functionName: "timeUntilBonus",
+          args: [userAddress],
+        },
+      ] as const)
+    : [];
+
   const { data, isLoading, refetch } = useReadContracts({
-    contracts: [
-      {
-        address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-        abi: stakingLPABI,
-        functionName: "totalSupply" as const,
-      },
-      {
-        address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-        abi: stakingLPABI,
-        functionName: "rewardRate" as const,
-      },
-      {
-        address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-        abi: stakingLPABI,
-        functionName: "estimatedAPR" as const,
-      },
-      ...(userAddress
-        ? [
-            {
-              address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-              abi: stakingLPABI,
-              functionName: "balances" as const,
-              args: [userAddress] as const,
-            },
-            {
-              address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-              abi: stakingLPABI,
-              functionName: "earnedWithBonus" as const,
-              args: [userAddress] as const,
-            },
-            {
-              address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-              abi: stakingLPABI,
-              functionName: "qualifiesForBonus" as const,
-              args: [userAddress] as const,
-            },
-            {
-              address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-              abi: stakingLPABI,
-              functionName: "timeUntilBonus" as const,
-              args: [userAddress] as const,
-            },
-          ]
-        : []),
-    ],
+    contracts: [...baseContracts, ...userContracts],
   });
 
   const earnedResult = userAddress ? (data?.[4].result as [bigint, bigint] | undefined) : undefined;
