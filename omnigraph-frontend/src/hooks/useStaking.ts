@@ -9,22 +9,22 @@ export function useStakingSingle(userAddress: `0x${string}` | undefined) {
       {
         address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
         abi: stakingSingleABI,
-        functionName: "totalSupply",
+        functionName: "totalSupply" as const,
       },
       {
         address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
         abi: stakingSingleABI,
-        functionName: "rewardRate",
+        functionName: "rewardRate" as const,
       },
       {
         address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
         abi: stakingSingleABI,
-        functionName: "periodFinish",
+        functionName: "periodFinish" as const,
       },
       {
         address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
         abi: stakingSingleABI,
-        functionName: "estimatedAPR",
+        functionName: "estimatedAPR" as const,
       },
       ...(userAddress
         ? [
@@ -63,17 +63,17 @@ export function useStakingLP(userAddress: `0x${string}` | undefined) {
       {
         address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
         abi: stakingLPABI,
-        functionName: "totalSupply",
+        functionName: "totalSupply" as const,
       },
       {
         address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
         abi: stakingLPABI,
-        functionName: "rewardRate",
+        functionName: "rewardRate" as const,
       },
       {
         address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
         abi: stakingLPABI,
-        functionName: "estimatedAPR",
+        functionName: "estimatedAPR" as const,
       },
       ...(userAddress
         ? [
