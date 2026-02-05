@@ -4,7 +4,7 @@ import { stakingSingleABI, stakingLPABI, tokenABI, erc20ABI } from "@/contracts/
 import { parseUnits } from "viem";
 
 export function useStakingSingle(userAddress: `0x${string}` | undefined) {
-  const baseContracts = [
+  const contracts: unknown[] = [
     {
       address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
       abi: stakingSingleABI,
@@ -25,43 +25,43 @@ export function useStakingSingle(userAddress: `0x${string}` | undefined) {
       abi: stakingSingleABI,
       functionName: "estimatedAPR",
     },
-  ] as const;
+  ];
 
-  const userContracts = userAddress
-    ? ([
-        {
-          address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
-          abi: stakingSingleABI,
-          functionName: "balances",
-          args: [userAddress],
-        },
-        {
-          address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
-          abi: stakingSingleABI,
-          functionName: "earned",
-          args: [userAddress],
-        },
-      ] as const)
-    : [];
+  if (userAddress) {
+    contracts.push(
+      {
+        address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
+        abi: stakingSingleABI,
+        functionName: "balances",
+        args: [userAddress],
+      },
+      {
+        address: CONTRACT_ADDRESSES.stakingSingle as `0x${string}`,
+        abi: stakingSingleABI,
+        functionName: "earned",
+        args: [userAddress],
+      }
+    );
+  }
 
   const { data, isLoading, refetch } = useReadContracts({
-    contracts: [...baseContracts, ...userContracts],
+    contracts: contracts as any,
   });
 
   return {
-    totalStaked: data?.[0].result as bigint | undefined,
-    rewardRate: data?.[1].result as bigint | undefined,
-    periodFinish: data?.[2].result as bigint | undefined,
-    estimatedAPR: data?.[3].result as bigint | undefined,
-    userStaked: userAddress ? (data?.[4].result as bigint | undefined) : undefined,
-    userEarned: userAddress ? (data?.[5].result as bigint | undefined) : undefined,
+    totalStaked: data?.[0]?.result as bigint | undefined,
+    rewardRate: data?.[1]?.result as bigint | undefined,
+    periodFinish: data?.[2]?.result as bigint | undefined,
+    estimatedAPR: data?.[3]?.result as bigint | undefined,
+    userStaked: userAddress ? (data?.[4]?.result as bigint | undefined) : undefined,
+    userEarned: userAddress ? (data?.[5]?.result as bigint | undefined) : undefined,
     isLoading,
     refetch,
   };
 }
 
 export function useStakingLP(userAddress: `0x${string}` | undefined) {
-  const baseContracts = [
+  const contracts: unknown[] = [
     {
       address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
       abi: stakingLPABI,
@@ -77,52 +77,52 @@ export function useStakingLP(userAddress: `0x${string}` | undefined) {
       abi: stakingLPABI,
       functionName: "estimatedAPR",
     },
-  ] as const;
+  ];
 
-  const userContracts = userAddress
-    ? ([
-        {
-          address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-          abi: stakingLPABI,
-          functionName: "balances",
-          args: [userAddress],
-        },
-        {
-          address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-          abi: stakingLPABI,
-          functionName: "earnedWithBonus",
-          args: [userAddress],
-        },
-        {
-          address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-          abi: stakingLPABI,
-          functionName: "qualifiesForBonus",
-          args: [userAddress],
-        },
-        {
-          address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
-          abi: stakingLPABI,
-          functionName: "timeUntilBonus",
-          args: [userAddress],
-        },
-      ] as const)
-    : [];
+  if (userAddress) {
+    contracts.push(
+      {
+        address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+        abi: stakingLPABI,
+        functionName: "balances",
+        args: [userAddress],
+      },
+      {
+        address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+        abi: stakingLPABI,
+        functionName: "earnedWithBonus",
+        args: [userAddress],
+      },
+      {
+        address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+        abi: stakingLPABI,
+        functionName: "qualifiesForBonus",
+        args: [userAddress],
+      },
+      {
+        address: CONTRACT_ADDRESSES.stakingLP as `0x${string}`,
+        abi: stakingLPABI,
+        functionName: "timeUntilBonus",
+        args: [userAddress],
+      }
+    );
+  }
 
   const { data, isLoading, refetch } = useReadContracts({
-    contracts: [...baseContracts, ...userContracts],
+    contracts: contracts as any,
   });
 
-  const earnedResult = userAddress ? (data?.[4].result as [bigint, bigint] | undefined) : undefined;
+  const earnedResult = userAddress ? (data?.[4]?.result as [bigint, bigint] | undefined) : undefined;
 
   return {
-    totalStaked: data?.[0].result as bigint | undefined,
-    rewardRate: data?.[1].result as bigint | undefined,
-    estimatedAPR: data?.[2].result as bigint | undefined,
-    userStaked: userAddress ? (data?.[3].result as bigint | undefined) : undefined,
+    totalStaked: data?.[0]?.result as bigint | undefined,
+    rewardRate: data?.[1]?.result as bigint | undefined,
+    estimatedAPR: data?.[2]?.result as bigint | undefined,
+    userStaked: userAddress ? (data?.[3]?.result as bigint | undefined) : undefined,
     userEarned: earnedResult?.[0],
     userBonus: earnedResult?.[1],
-    qualifiesForBonus: userAddress ? (data?.[5].result as boolean | undefined) : undefined,
-    timeUntilBonus: userAddress ? (data?.[6].result as bigint | undefined) : undefined,
+    qualifiesForBonus: userAddress ? (data?.[5]?.result as boolean | undefined) : undefined,
+    timeUntilBonus: userAddress ? (data?.[6]?.result as bigint | undefined) : undefined,
     isLoading,
     refetch,
   };

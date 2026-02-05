@@ -30,7 +30,7 @@ export default function VestingPage() {
             <h2 className="text-2xl font-bold mb-3 gradient-text">Linear Vesting Schedule</h2>
             <p className="text-gray-300 mb-6 text-lg">
               Tokens vest linearly over time. You can claim your vested tokens at any time -
-              there's no need to claim daily, your entitlement accumulates automatically.
+              there&apos;s no need to claim daily, your entitlement accumulates automatically.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
               <div className="bg-dark-200/50 backdrop-blur-sm rounded-xl p-5 border border-base-blue/20 hover:border-base-blue/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-base-blue/20">
@@ -82,7 +82,7 @@ export default function VestingPage() {
             <Card>
               <h3 className="font-semibold mb-3">Need Help?</h3>
               <p className="text-sm text-gray-400 mb-4">
-                If you believe you should have vesting allocations but don't see them,
+                If you believe you should have vesting allocations but don&apos;t see them,
                 please contact the team.
               </p>
               <a

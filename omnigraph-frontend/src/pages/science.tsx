@@ -60,7 +60,7 @@ export default function SciencePage() {
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8 text-center gradient-text">Real-World Applications</h2>
           <p className="text-gray-300 text-lg text-center max-w-4xl mx-auto mb-12">
-            Graphene's unique properties make it valuable across multiple high-growth industries. According to Grand View Research, the global graphene market is projected to grow significantly as production methods scale.
+            Graphene&apos;s unique properties make it valuable across multiple high-growth industries. According to Grand View Research, the global graphene market is projected to grow significantly as production methods scale.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -149,7 +149,7 @@ export default function SciencePage() {
           <div className="bg-gradient-to-br from-base-blue/10 to-accent-500/10 rounded-2xl p-8 border border-base-blue/30">
             <h2 className="text-3xl font-bold mb-6 gradient-text">The Production Challenge</h2>
             <p className="text-gray-300 text-lg mb-6">
-              Despite graphene's incredible potential, widespread adoption has been limited by three key challenges:
+              Despite graphene&apos;s incredible potential, widespread adoption has been limited by three key challenges:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-dark-200/50 rounded-xl p-6">
@@ -176,7 +176,7 @@ export default function SciencePage() {
           <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl p-8 border border-green-500/20">
             <h2 className="text-3xl font-bold mb-6 gradient-text">Carbon-Aware Production Pathways</h2>
             <p className="text-gray-300 text-lg mb-6">
-              {PROJECT_CONFIG.PARENT_COMPANY}'s approach uses pyrolysis technology, which can be carbon-negative when designed and measured correctly.
+              {PROJECT_CONFIG.PARENT_COMPANY}&apos;s approach uses pyrolysis technology, which can be carbon-negative when designed and measured correctly.
             </p>
             <div className="bg-dark-200/50 rounded-xl p-6 mb-6">
               <h3 className="font-bold text-xl mb-4">What is Pyrolysis?</h3>

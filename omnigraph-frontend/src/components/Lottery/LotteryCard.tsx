@@ -120,7 +120,7 @@ export function LotteryCard() {
             {epoch.winner.slice(0, 10)}...{epoch.winner.slice(-8)}
           </p>
           {canClaim && (
-            <p className="text-green-400 text-sm mt-2">That's you! Claim your prize below.</p>
+            <p className="text-green-400 text-sm mt-2">That&apos;s you! Claim your prize below.</p>
           )}
         </div>
       )}

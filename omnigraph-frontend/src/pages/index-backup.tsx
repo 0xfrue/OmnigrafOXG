@@ -114,7 +114,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 gradient-text">Graphene is a rare material with massive real-world utility.</h2>
             <p className="text-gray-300 text-lg max-w-4xl mx-auto">
-              Graphene is a single atomic layer of carbon arranged in a hexagonal lattice. It's exceptionally strong, lightweight, nearly transparent, and highly conductive—making it relevant across multiple industries already being explored at scale.
+              Graphene is a single atomic layer of carbon arranged in a hexagonal lattice. It&apos;s exceptionally strong, lightweight, nearly transparent, and highly conductive—making it relevant across multiple industries already being explored at scale.
             </p>
           </div>
 
@@ -145,7 +145,7 @@ export default function Home() {
           <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-3xl p-8 border border-green-500/20">
             <h2 className="text-3xl font-bold mb-4 text-center gradient-text">Advancing graphene with a carbon-aware production pathway.</h2>
             <p className="text-gray-300 text-lg max-w-4xl mx-auto mb-6">
-              {PROJECT_CONFIG.PARENT_COMPANY}'s production approach is described as carbon negative and near carbon neutral through pyrolysis (as reported by the team). More broadly, pyrolysis-to-biochar systems can be net carbon-negative depending on inputs and lifecycle assessment—making this pathway credible when measured and verified.
+              {PROJECT_CONFIG.PARENT_COMPANY}&apos;s production approach is described as carbon negative and near carbon neutral through pyrolysis (as reported by the team). More broadly, pyrolysis-to-biochar systems can be net carbon-negative depending on inputs and lifecycle assessment—making this pathway credible when measured and verified.
             </p>
             <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 max-w-3xl mx-auto">
               <p className="text-sm text-gray-300">

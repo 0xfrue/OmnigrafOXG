@@ -196,7 +196,7 @@ export default function RiskPage() {
           <div className="bg-dark-200/50 backdrop-blur-sm rounded-2xl p-8 border border-base-blue/20">
             <h2 className="text-2xl font-bold mb-4 gradient-text">Forward-Looking Statements</h2>
             <p className="text-gray-300 mb-4">
-              This website contains forward-looking statements about future plans, objectives, and expectations. Words like "may," "intend," "plan," "explore," "design," and similar language indicate forward-looking statements.
+              This website contains forward-looking statements about future plans, objectives, and expectations. Words like &quot;may,&quot; &quot;intend,&quot; &quot;plan,&quot; &quot;explore,&quot; &quot;design,&quot; and similar language indicate forward-looking statements.
             </p>
             <p className="text-gray-300">
               These statements are not guarantees and are subject to risks, uncertainties, and assumptions. Actual results may differ materially from these statements. Do not rely on forward-looking statements as predictions of future events.
