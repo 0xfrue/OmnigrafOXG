@@ -153,7 +153,7 @@ export default function Home() {
             {[
               { label: "Supply", value: PROJECT_CONFIG.TOTAL_SUPPLY },
               { label: "Network", value: "BASE" },
-              { label: "Price", value: "$0.02" },
+              { label: "Price", value: "TBD" },
               { label: "Payment", value: "USDC/ETH" },
             ].map((stat, i) => (
               <div key={i} className="glass-card rounded-2xl p-8 text-center card-3d magnetic-hover shimmer">
