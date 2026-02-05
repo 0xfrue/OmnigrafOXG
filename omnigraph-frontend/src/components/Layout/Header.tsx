@@ -37,7 +37,7 @@ export function Header() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-base sm:text-lg leading-none gradient-text">Graphene Token</span>
+              <span className="font-bold text-base sm:text-lg leading-none gradient-text">omnigraf</span>
               <span className="text-[10px] sm:text-xs text-gray-500 leading-none">Built on Base ⚡</span>
             </div>
           </Link>

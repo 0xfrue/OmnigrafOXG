@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>{PROJECT_CONFIG.PROJECT_NAME} on BASE - Revolutionary Graphene Token</title>
-        <meta name="description" content="Graphene Token (GRAF) - Built on Base Network. TGE $0.02. Fund the future of graphene research." />
+        <title>Omnigraf - Built on Base</title>
+        <meta name="description" content="Omnigraf - Real Graphene Utility On-chain. Built on Base Network. Token Coming Soon." />
       </Head>
 
       <VideoBackground />
@@ -27,25 +27,37 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-base-blue/10 via-accent-500/5 to-purple-500/10 gradient-shift rounded-[3rem] blur-3xl -z-10" />
           <div className="absolute inset-0 bg-gradient-to-tl from-blue-600/10 via-transparent to-cyan-500/10 animate-pulse opacity-30 rounded-[3rem] blur-2xl -z-10" />
 
+          {/* Centered Logo */}
+          <div className="flex justify-center mb-8 md:mb-10">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-base-blue/50 ring-4 ring-base-blue/30">
+              <img
+                src="/omnigraf-logo.jpg"
+                alt="Omnigraf Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+
           {/* BASE Badge */}
           <div className="flex justify-center mb-8 md:mb-10">
             <div className="inline-flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 py-2 sm:py-3 glass-card rounded-full glow-base pulse-ring">
               <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 111 111" fill="none">
                 <path d="M54.921 110.034C85.359 110.034 110.034 85.402 110.034 55.017C110.034 24.6319 85.359 0 54.921 0C26.0432 0 2.35281 22.1714 0 50.3923H72.8467V59.6416H0C2.35281 87.8625 26.0432 110.034 54.921 110.034Z" fill="#0052FF"/>
               </svg>
-              <span className="text-sm sm:text-base font-bold text-base-blue neon-base">BUILT ON BASE</span>
+              <span className="text-sm sm:text-base font-bold text-base-blue neon-base">OMNIGRAF BUILT ON BASE</span>
               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400 animate-pulse" />
             </div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold mb-6 md:mb-8">
-            <span className="gradient-text neon-base block">Graphene research</span>
-            <span className="gradient-text neon-base block">meets on-chain</span>
-            <span className="gradient-text neon-base block">coordination</span>
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 md:mb-8 px-4">
+            <span className="gradient-text neon-base block">SpaceX Proved It Real</span>
+            <span className="gradient-text neon-base block">Graphene in orbit.</span>
+            <span className="gradient-text neon-base block mt-4">AI Demands It</span>
+            <span className="gradient-text neon-base block">Real Utility On-chain.</span>
           </h1>
 
-          <p className="text-gray-300 text-base sm:text-lg md:text-3xl max-w-5xl mx-auto mb-6 md:mb-8 font-light leading-relaxed px-4">
-            <span className="text-base-blue font-semibold">Decentralized funding</span> × <span className="text-accent-400 font-semibold">Research collaboration</span> × <span className="text-primary-400 font-semibold">Real-world impact</span>
+          <p className="text-gray-300 text-xl sm:text-2xl md:text-4xl max-w-5xl mx-auto mb-6 md:mb-8 font-semibold leading-relaxed px-4">
+            <span className="text-base-blue">Token Coming Soon to Base.</span>
           </p>
 
           {/* 3D Feature Cards */}
