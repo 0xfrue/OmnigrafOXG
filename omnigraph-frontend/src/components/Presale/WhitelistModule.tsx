@@ -80,7 +80,7 @@ export function WhitelistModule() {
       <div className="bg-gradient-to-br from-green-500/10 to-accent-500/10 rounded-2xl p-4 sm:p-6 md:p-8 border border-green-500/30">
         <div className="text-center">
           <div className="text-4xl sm:text-5xl md:text-6xl mb-4">🎉</div>
-          <h3 className="text-xl sm:text-2xl font-bold mb-2 text-green-400">You're on the Whitelist!</h3>
+          <h3 className="text-xl sm:text-2xl font-bold mb-2 text-green-400">You are on the Whitelist!</h3>
           <p className="text-gray-300 mb-4 text-sm sm:text-base">{message}</p>
           {position && (
             <div className="inline-flex items-center space-x-2 bg-green-500/20 px-4 py-2 rounded-full mb-6">
@@ -89,11 +89,11 @@ export function WhitelistModule() {
             </div>
           )}
           <div className="bg-dark-200/50 rounded-xl p-4 sm:p-6 text-left">
-            <h4 className="font-bold text-gray-300 mb-3 text-sm sm:text-base">What's Next?</h4>
+            <h4 className="font-bold text-gray-300 mb-3 text-sm sm:text-base">What Happens Next?</h4>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-400">
               <li className="flex items-start space-x-2">
                 <span className="text-green-400">✓</span>
-                <span>You'll receive priority access when the sale goes live</span>
+                <span>You will receive priority access when the sale goes live</span>
               </li>
               <li className="flex items-start space-x-2">
                 <span className="text-green-400">✓</span>
