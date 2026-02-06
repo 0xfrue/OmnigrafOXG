@@ -4,6 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { PROJECT_CONFIG, COMPLIANCE, PLACEHOLDERS } from "@/config/constants";
 import { BuyModule } from "@/components/Presale/BuyModule";
+import { WhitelistModule } from "@/components/Presale/WhitelistModule";
 import { CountdownTimer } from "@/components/Presale/CountdownTimer";
 import { TrustStrip } from "@/components/Presale/TrustStrip";
 import { VideoBackground } from "@/components/Effects/VideoBackground";
@@ -187,6 +188,17 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* WHITELIST MODULE */}
+        <section className="my-16 md:my-24" id="whitelist">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-center gradient-text neon-base px-4">Join the Whitelist</h2>
+          <p className="text-center text-gray-400 text-sm sm:text-base md:text-lg mb-8 md:mb-12 max-w-2xl mx-auto px-4">
+            Reserve your spot now and get priority access when the token sale goes live
+          </p>
+          <div className="max-w-xl mx-auto px-4">
+            <WhitelistModule />
           </div>
         </section>
 
