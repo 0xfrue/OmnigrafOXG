@@ -151,7 +151,8 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12 glass-card rounded-3xl p-8 max-w-4xl mx-auto">
-            <p className="text-2xl font-bold gradient-text">{PROJECT_CONFIG.PROJECT_NAME} solves the production bottleneck</p>
+            <p className="text-2xl font-bold gradient-text">{PROJECT_CONFIG.PROJECT_NAME} Shaping Tomorrow’s Blockchain Engineered for Performance Powered by Community.
+</p>
           </div>
         </section>
 
