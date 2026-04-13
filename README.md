@@ -1,1 +1,1 @@
-OmnigrafOXG
+Omnigrafx
