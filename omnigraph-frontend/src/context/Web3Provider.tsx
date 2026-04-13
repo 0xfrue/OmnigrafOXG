@@ -8,7 +8,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 
 const config = getDefaultConfig({
   appName: "Omnigrafx",
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo",
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "ff9eca9414dee31f32cdaaedeed38125",
   chains: [base, baseSepolia],
   transports: {
     [base.id]: http(),
