@@ -49,7 +49,7 @@ export const PROJECT_CONFIG = {
 
   // Links & Addresses (placeholders)
   TOKEN_CONTRACT_ADDRESS: "0x...", // Update after deployment
-  SALE_CONTRACT_ADDRESS: "0x...", // Update after deployment
+  SALE_CONTRACT_ADDRESS: process.env.NEXT_PUBLIC_PRESALE_WALLET || "0x7A329d5A159f4025ddCfB1a78aE3809Fa824659c",
   DOCS_URL: "/docs",
   SUPPORT_LINK: "mailto:support@resolutx.com",
   KYC_LINK: "/kyc",
@@ -57,7 +57,7 @@ export const PROJECT_CONFIG = {
 
   // Social Links
   TWITTER_URL: "https://twitter.com/graphenetoken",
-  DISCORD_URL: "https://discord.gg/graphenetoken",
+  DISCORD_URL: "",
   TELEGRAM_URL: "https://t.me/graphenetoken",
 
   // Tax Caps

@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="description" content="OmnigrafOXG - Community token funding decentralized graphene research and development on Base Network" />
+        <meta name="description" content="Omnigrafx - Community token funding decentralized graphene research and development on Base Network" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

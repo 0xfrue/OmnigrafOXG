@@ -8,7 +8,7 @@ export default function VestingPage() {
   return (
     <>
       <Head>
-        <title>OmnigrafOXG - Token Vesting</title>
+        <title>Omnigrafx - Token Vesting</title>
       </Head>
 
       <div className="container mx-auto px-4 py-8">
@@ -85,14 +85,6 @@ export default function VestingPage() {
                 If you believe you should have vesting allocations but don&apos;t see them,
                 please contact the team.
               </p>
-              <a
-                href="https://discord.gg/omnigraph"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-400 hover:text-primary-300 text-sm"
-              >
-                Join Discord for Support →
-              </a>
             </Card>
           </div>
         </div>

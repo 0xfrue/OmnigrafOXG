@@ -8,7 +8,7 @@ export default function LotteryPage() {
   return (
     <>
       <Head>
-        <title>OmnigrafOXG - Community Lottery</title>
+        <title>Omnigrafx - Community Lottery</title>
       </Head>
 
       <div className="container mx-auto px-4 py-8">

@@ -9,11 +9,11 @@ import { useState } from "react";
 
 const navItems = [
   { href: "/", label: "Overview" },
+  { href: "/presale", label: "Presale", highlight: true },
   { href: "/science", label: "Science" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/#tokenomics", label: "Tokenomics" },
-  { href: "/#buy", label: "Sale" },
-  { href: "/risk", label: "Risk" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 export function Header() {
@@ -29,7 +29,7 @@ export function Header() {
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden shadow-lg shadow-base-blue/50 group-hover:shadow-xl group-hover:shadow-base-blue/70 transition-all duration-300 group-hover:scale-105 relative ring-2 ring-base-blue/30 group-hover:ring-base-blue/60 bg-transparent">
               <Image
                 src="/omnigraf-logo.png"
-                alt="Graphene Token Logo"
+                alt="Omnigrafx Logo"
                 width={48}
                 height={48}
                 className="object-contain mix-blend-lighten"
@@ -37,7 +37,7 @@ export function Header() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-base sm:text-lg leading-none gradient-text">omnigraf</span>
+              <span className="font-bold text-base sm:text-lg leading-none gradient-text">omnigrafx</span>
               <span className="text-[10px] sm:text-xs text-gray-500 leading-none">Built on Base ⚡</span>
             </div>
           </Link>
@@ -52,6 +52,8 @@ export function Header() {
                   "px-4 py-2 rounded-lg font-medium transition-colors",
                   pathname === item.href
                     ? "bg-primary-500/20 text-primary-400"
+                    : (item as any).highlight
+                    ? "text-base-blue hover:text-white hover:bg-base-blue/10 border border-base-blue/30"
                     : "text-gray-400 hover:text-white hover:bg-white/5"
                 )}
               >
@@ -107,6 +109,8 @@ export function Header() {
                     "px-4 py-3 rounded-lg font-medium transition-colors",
                     pathname === item.href
                       ? "bg-primary-500/20 text-primary-400"
+                      : (item as any).highlight
+                      ? "text-base-blue bg-base-blue/5 border border-base-blue/20"
                       : "text-gray-400 hover:text-white hover:bg-white/5"
                   )}
                 >

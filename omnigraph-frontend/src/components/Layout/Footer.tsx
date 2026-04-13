@@ -7,7 +7,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex flex-col items-center md:items-start space-y-2">
             <div className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} OmnigrafOXG. Advancing graphene research through community.
+              © {new Date().getFullYear()} Omnigrafx. Advancing graphene research through community.
             </div>
             <div className="flex items-center space-x-2">
               <span className="text-xs text-gray-500">Powered by</span>
@@ -25,22 +25,6 @@ export function Footer() {
               className="text-gray-400 hover:text-white transition-colors"
             >
               Twitter
-            </a>
-            <a
-              href="https://discord.gg/omnigraph"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Discord
-            </a>
-            <a
-              href="https://docs.omnigraph.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Docs
             </a>
             <a
               href="https://basescan.org"

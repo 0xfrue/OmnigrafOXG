@@ -2,10 +2,7 @@
 
 import Head from "next/head";
 import Link from "next/link";
-import { PROJECT_CONFIG, COMPLIANCE, PLACEHOLDERS } from "@/config/constants";
-import { BuyModule } from "@/components/Presale/BuyModule";
-import { WhitelistModule } from "@/components/Presale/WhitelistModule";
-import { CountdownTimer } from "@/components/Presale/CountdownTimer";
+import { PROJECT_CONFIG } from "@/config/constants";
 import { TrustStrip } from "@/components/Presale/TrustStrip";
 import { VideoBackground } from "@/components/Effects/VideoBackground";
 import { FloatingParticles } from "@/components/Effects/FloatingParticles";
@@ -14,8 +11,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Omnigraf - Built on Base</title>
-        <meta name="description" content="Omnigraf - Real Graphene Utility On-chain. Built on Base Network. Token Coming Soon." />
+        <title>Omnigrafx - Built on Base</title>
+        <meta name="description" content="Omnigrafx - Real Graphene Utility On-chain. Built on Base Network. Token Coming Soon." />
       </Head>
 
       <VideoBackground />
@@ -33,7 +30,7 @@ export default function Home() {
             <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-base-blue/50 ring-4 ring-base-blue/30 morph-border pulse-ring magnetic-hover glow-base">
               <img
                 src="/omnigraf-logo.png"
-                alt="Omnigraf Logo"
+                alt="Omnigrafx Logo"
                 className="w-full h-full object-contain"
               />
             </div>
@@ -45,7 +42,7 @@ export default function Home() {
               <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 111 111" fill="none">
                 <path d="M54.921 110.034C85.359 110.034 110.034 85.402 110.034 55.017C110.034 24.6319 85.359 0 54.921 0C26.0432 0 2.35281 22.1714 0 50.3923H72.8467V59.6416H0C2.35281 87.8625 26.0432 110.034 54.921 110.034Z" fill="#0052FF"/>
               </svg>
-              <span className="text-sm sm:text-base font-bold text-base-blue neon-base">OMNIGRAF BUILT ON BASE</span>
+              <span className="text-sm sm:text-base font-bold text-base-blue neon-base">OMNIGRAFX BUILT ON BASE</span>
               <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400 animate-pulse" />
             </div>
           </div>
@@ -61,11 +58,11 @@ export default function Home() {
             <span className="text-base-blue">Token Coming Soon to Base.</span>
           </p>
 
-          {/* Join Whitelist CTA - Primary */}
+          {/* Join Presale CTA - Primary */}
           <div className="flex justify-center mb-12">
-            <Link href="#whitelist">
+            <Link href="/presale">
               <button className="px-8 py-4 md:px-12 md:py-5 bg-gradient-to-r from-base-blue via-purple-500 to-cyan-500 rounded-2xl font-bold text-base md:text-lg shadow-2xl shadow-base-blue/50 hover:-translate-y-2 liquid-button magnetic-hover ripple transition-all duration-300 hover:shadow-base-blue/70">
-                Join Whitelist
+                Join Presale
               </button>
             </Link>
           </div>
@@ -104,22 +101,17 @@ export default function Home() {
 
           {/* CTAs */}
           <div className="flex flex-wrap justify-center gap-3 md:gap-6 px-4">
-            <button
-              disabled
-              className="px-6 py-3 md:px-10 md:py-5 bg-gray-600 rounded-2xl font-bold text-sm md:text-lg text-gray-400 cursor-not-allowed opacity-50"
-            >
-              🚀 Buy Token — Coming Soon
-            </button>
-            <Link href="#whitelist">
+            <Link href="/presale">
+              <button className="px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-base-blue to-accent-500 rounded-2xl font-bold text-sm md:text-lg shadow-2xl shadow-base-blue/50 hover:-translate-y-2 transition-all duration-500 magnetic-hover">
+                🚀 Join Presale
+              </button>
+            </Link>
+            <Link href="/faq">
               <button className="px-6 py-3 md:px-10 md:py-5 glass-card border-2 border-base-blue/50 hover:border-base-blue rounded-2xl font-bold text-sm md:text-lg transition-all duration-500 hover:-translate-y-2 magnetic-hover">
-                ⭐ Join Whitelist
+                FAQ & Due Diligence
               </button>
             </Link>
           </div>
-
-          <p className="text-xs text-gray-500 mt-8 max-w-3xl mx-auto">
-            <Link href="/risk" className="text-accent-400 hover:underline font-semibold">Review risks & eligibility →</Link>
-          </p>
         </section>
 
         <TrustStrip />
@@ -192,40 +184,25 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WHITELIST MODULE */}
-        <section className="my-16 md:my-24" id="whitelist">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-center gradient-text neon-base px-4">Join the Whitelist</h2>
-          <p className="text-center text-gray-400 text-sm sm:text-base md:text-lg mb-8 md:mb-12 max-w-2xl mx-auto px-4">
-            Reserve your spot now and get priority access when the token sale goes live
-          </p>
-          <div className="max-w-xl mx-auto px-4">
-            <WhitelistModule />
-          </div>
-        </section>
-
-        {/* BUY MODULE */}
-        <section className="my-16 md:my-24" id="buy">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center gradient-text neon-base px-4">Get Token</h2>
-          <div className="max-w-3xl mx-auto">
-            <BuyModule />
-          </div>
-        </section>
-
-        {/* FINAL CTA */}
-        <section className="text-center py-12 md:py-16 glass-card rounded-3xl md:rounded-[3rem] mx-4">
-          <div className="text-4xl md:text-6xl mb-4 md:mb-6 animate-bounce">🚀</div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 gradient-text px-4">Join the Revolution</h2>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-6 px-4">
-            <Link href="#buy">
-              <button className="px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-base-blue to-accent-500 rounded-2xl font-bold text-sm md:text-lg shadow-2xl shadow-base-blue/50 hover:-translate-y-2 liquid-button magnetic-hover">
-                Buy Now
-              </button>
-            </Link>
-            <Link href="/risk">
-              <button className="px-6 py-3 md:px-10 md:py-5 glass-card border-2 border-base-blue/50 rounded-2xl font-bold text-sm md:text-lg hover:-translate-y-2 magnetic-hover">
-                Review Risks
-              </button>
-            </Link>
+        {/* PRESALE CTA SECTION */}
+        <section className="my-16 md:my-24">
+          <div className="max-w-2xl mx-auto text-center glass-card rounded-3xl p-8 md:p-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 gradient-text neon-base">Join the Presale</h2>
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg mb-8 max-w-xl mx-auto">
+              Purchase GRAF tokens with USDC or ETH on Base network.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/presale">
+                <button className="px-8 py-4 bg-gradient-to-r from-base-blue to-accent-500 rounded-2xl font-bold text-base shadow-2xl shadow-base-blue/50 hover:-translate-y-2 transition-all duration-300 magnetic-hover">
+                  Buy Tokens
+                </button>
+              </Link>
+              <Link href="/faq">
+                <button className="px-8 py-4 glass-card border-2 border-base-blue/50 rounded-2xl font-bold text-base hover:-translate-y-2 transition-all duration-300 magnetic-hover">
+                  FAQ & Due Diligence
+                </button>
+              </Link>
+            </div>
           </div>
         </section>
       </div>

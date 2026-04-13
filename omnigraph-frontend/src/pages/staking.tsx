@@ -7,7 +7,7 @@ export default function StakingPage() {
   return (
     <>
       <Head>
-        <title>OmnigrafOXG - Staking</title>
+        <title>Omnigrafx - Staking</title>
       </Head>
 
       <div className="container mx-auto px-4 py-8">
