@@ -40,7 +40,7 @@ export const PROJECT_CONFIG = {
   WL_MAX: "5,000",
   WL_CAP: "100,000,000",
 
-  PUBLIC_MIN: "20",
+  PUBLIC_MIN: "100",
   PUBLIC_MAX: "2,000",
   PUBLIC_CAP: "150,000,000",
 
