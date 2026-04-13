@@ -19,7 +19,7 @@ export function Footer() {
           </div>
           <div className="flex items-center space-x-6">
             <a
-              href="https://twitter.com/omnigraph"
+              href="https://x.com/OmnigrafOGX"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"

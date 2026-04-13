@@ -56,7 +56,7 @@ export const PROJECT_CONFIG = {
   BASE_EXPLORER_URL: "https://basescan.org",
 
   // Social Links
-  TWITTER_URL: "https://twitter.com/graphenetoken",
+  TWITTER_URL: "https://x.com/OmnigrafOGX",
   DISCORD_URL: "",
   TELEGRAM_URL: "https://t.me/graphenetoken",
 
