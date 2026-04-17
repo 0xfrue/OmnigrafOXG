@@ -57,23 +57,13 @@ const SALE_IS_LIVE = false;
 const PRESALE_PHASES = [
   {
     name: "Private Round",
-    price: "$0.015",
+    price: PROJECT_CONFIG.PRESALE_PRICE,
     min: PROJECT_CONFIG.PRIVATE_MIN,
     max: PROJECT_CONFIG.PRIVATE_MAX,
     cap: PROJECT_CONFIG.PRIVATE_CAP,
-    bonus: "25% Bonus",
+    bonus: `${PROJECT_CONFIG.PRESALE_DISCOUNT} Below TGE`,
     start: PROJECT_CONFIG.PRIVATE_START,
     end: PROJECT_CONFIG.PRIVATE_END,
-  },
-  {
-    name: "Whitelist Round",
-    price: "$0.018",
-    min: PROJECT_CONFIG.WL_MIN,
-    max: PROJECT_CONFIG.WL_MAX,
-    cap: PROJECT_CONFIG.WL_CAP,
-    bonus: "10% Bonus",
-    start: PROJECT_CONFIG.WL_START,
-    end: PROJECT_CONFIG.WL_END,
   },
   {
     name: "Public Round",
@@ -168,36 +158,71 @@ function BuySection() {
   if (!isConnected) {
     return (
       <div className="space-y-5">
-        <div className="text-center py-6">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-base-blue/10 border-2 border-base-blue/30 flex items-center justify-center">
-            <svg className="w-8 h-8 text-base-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 013 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 013 6v3" />
-            </svg>
+        {/* Primary: send direct — no wallet connection required */}
+        <div className="rounded-2xl border border-base-blue/40 bg-gradient-to-br from-base-blue/10 to-accent-500/5 p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-flex items-center gap-1 rounded-full bg-green-500/15 border border-green-500/40 px-2.5 py-0.5 text-[10px] font-semibold text-green-300 uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              No Wallet Connection Required
+            </span>
           </div>
-          <h3 className="text-lg font-bold text-white mb-2">Connect Your Wallet</h3>
-          <p className="text-sm text-gray-400 mb-6 max-w-sm mx-auto">
-            Connect your wallet to send USDC or ETH directly to the presale.
+          <h3 className="text-lg font-bold text-white mb-1">Send Direct to the Presale Wallet</h3>
+          <p className="text-sm text-gray-300 mb-4">
+            Send {PROJECT_CONFIG.ACCEPTED_TOKENS.join(" or ")} on {PROJECT_CONFIG.NETWORK} from any wallet or exchange. Tokens are allocated to the sending address at TGE — you do not need to connect here.
           </p>
-          <ConnectButton.Custom>
-            {({ openConnectModal }) => (
-              <Button onClick={openConnectModal} className="px-8 py-3">
-                Connect Wallet
-              </Button>
-            )}
-          </ConnectButton.Custom>
+
+          <div className="bg-dark-200/70 rounded-xl p-3 mb-3">
+            <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1.5">Presale Wallet Address</p>
+            <p className="font-mono text-xs text-base-blue break-all select-all">{PROJECT_CONFIG.SALE_CONTRACT_ADDRESS}</p>
+            <div className="flex items-center gap-3 mt-2">
+              <button
+                onClick={() => navigator.clipboard.writeText(PROJECT_CONFIG.SALE_CONTRACT_ADDRESS)}
+                className="text-[11px] text-accent-400 hover:underline"
+              >
+                Copy address
+              </button>
+              <a
+                href={`https://basescan.org/address/${PROJECT_CONFIG.SALE_CONTRACT_ADDRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-base-blue hover:underline"
+              >
+                View on BaseScan
+              </a>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="bg-dark-200/50 rounded-lg p-2">
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider">Network</p>
+              <p className="text-sm font-semibold text-white">{PROJECT_CONFIG.NETWORK}</p>
+            </div>
+            <div className="bg-dark-200/50 rounded-lg p-2">
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider">Minimum</p>
+              <p className="text-sm font-semibold text-white">{PROJECT_CONFIG.PUBLIC_MIN} USDC</p>
+            </div>
+            <div className="bg-dark-200/50 rounded-lg p-2">
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider">Accepts</p>
+              <p className="text-sm font-semibold text-white">{PROJECT_CONFIG.ACCEPTED_TOKENS.join(" / ")}</p>
+            </div>
+          </div>
+
+          <p className="text-[11px] text-gray-500 mt-3 leading-relaxed">
+            Send only on {PROJECT_CONFIG.NETWORK}. Funds sent on other networks will be lost. Keep records of your transaction hash for allocation verification.
+          </p>
         </div>
 
-        {/* Manual instructions fallback */}
-        <div className="border-t border-white/5 pt-4">
-          <p className="text-xs text-gray-500 text-center mb-3">Or send manually to the presale wallet:</p>
-          <div className="bg-dark-200/60 rounded-xl p-3">
-            <p className="font-mono text-xs text-base-blue break-all select-all text-center">{PROJECT_CONFIG.SALE_CONTRACT_ADDRESS}</p>
-            <button
-              onClick={() => navigator.clipboard.writeText(PROJECT_CONFIG.SALE_CONTRACT_ADDRESS)}
-              className="block mx-auto mt-2 text-[10px] text-accent-400 hover:underline"
-            >
-              Copy address
-            </button>
+        {/* Secondary: connect wallet for guided flow */}
+        <div className="border-t border-white/5 pt-5">
+          <div className="text-center">
+            <p className="text-xs text-gray-500 mb-3">Prefer an in-browser flow? Connect your wallet to send with one click.</p>
+            <ConnectButton.Custom>
+              {({ openConnectModal }) => (
+                <Button onClick={openConnectModal} variant="outline" className="px-6 py-2.5 text-sm">
+                  Connect Wallet (Optional)
+                </Button>
+              )}
+            </ConnectButton.Custom>
           </div>
         </div>
       </div>
@@ -762,7 +787,7 @@ export default function PresalePage() {
         {/* Presale Phases */}
         <div className="max-w-3xl mx-auto mb-8 md:mb-10">
           <h3 className="text-sm font-semibold text-gray-400 mb-4 text-center uppercase tracking-wider">Sale Phases</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {PRESALE_PHASES.map((phase, i) => (
               <div
                 key={i}
@@ -859,17 +884,20 @@ export default function PresalePage() {
         {/* Vesting Info */}
         <div className="max-w-3xl mx-auto mt-12 md:mt-16">
           <div className="glass-card rounded-2xl p-6 md:p-8">
-            <h3 className="font-bold text-xl mb-6 text-center gradient-text">Token Vesting Schedule</h3>
+            <h3 className="font-bold text-xl mb-2 text-center gradient-text">Token Vesting Schedule</h3>
+            <p className="text-center text-gray-400 text-sm mb-6">
+              50% at TGE · 50% streamed daily over 15 months
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                { round: "Round 1 (Private)", tge: PROJECT_CONFIG.R1_TGE, vesting: PROJECT_CONFIG.R1_VESTING },
-                { round: "Round 2 (Whitelist)", tge: PROJECT_CONFIG.R2_TGE, vesting: PROJECT_CONFIG.R2_VESTING },
-                { round: "Round 3 (Public)", tge: PROJECT_CONFIG.R3_TGE, vesting: PROJECT_CONFIG.R3_VESTING },
+                { label: "At TGE", value: "50%", desc: "Unlocked immediately" },
+                { label: "Stream", value: "50%", desc: "Daily linear release" },
+                { label: "Duration", value: "15 months", desc: "Full unlock by month 15" },
               ].map((item, i) => (
                 <div key={i} className="bg-dark-200/50 rounded-xl p-4 text-center">
-                  <p className="text-xs text-gray-500 mb-2">{item.round}</p>
-                  <p className="text-lg font-bold text-white mb-1">{item.tge} at TGE</p>
-                  <p className="text-sm text-gray-400">{item.vesting}</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">{item.label}</p>
+                  <p className="text-2xl font-bold text-white mb-1">{item.value}</p>
+                  <p className="text-sm text-gray-400">{item.desc}</p>
                 </div>
               ))}
             </div>

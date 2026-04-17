@@ -150,34 +150,135 @@ export default function Home() {
 
         {/* TOKENOMICS */}
         <section className="my-16 md:my-24" id="tokenomics">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center gradient-text neon-base px-4">Tokenomics</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center gradient-text neon-base px-4">Tokenomics</h2>
+          <p className="text-center text-gray-400 text-sm sm:text-base mb-10 md:mb-12 px-4">
+            OMNIGRAF · $GRAF · Base (Aerodrome) · 1,000,000,000 fixed supply · no mint function
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          {/* Headline stats */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12 max-w-5xl mx-auto">
             {[
-              { label: "Supply", value: PROJECT_CONFIG.TOTAL_SUPPLY },
-              { label: "Network", value: "BASE" },
-              { label: "Price", value: "TBD" },
-              { label: "Payment", value: "USDC/ETH" },
+              { label: "Launch FDV", value: PROJECT_CONFIG.LAUNCH_FDV },
+              { label: "Buyer ROI Day 1", value: "+46%" },
+              { label: "Circulating Float", value: PROJECT_CONFIG.CIRCULATING_PCT },
+              { label: "Hard Cap Raise", value: "$360K" },
+              { label: "Peak FDV (Hard Cap)", value: PROJECT_CONFIG.PEAK_FDV },
+              { label: "Pool Deaths (Monte Carlo)", value: "0 / 50K" },
             ].map((stat, i) => (
-              <div key={i} className="glass-card rounded-2xl p-8 text-center card-3d magnetic-hover shimmer">
-                <p className="text-sm text-gray-400 mb-3">{stat.label}</p>
-                <p className="text-3xl font-bold">{stat.value}</p>
+              <div key={i} className="glass-card rounded-2xl p-6 md:p-8 text-center card-3d magnetic-hover shimmer">
+                <p className="text-xs sm:text-sm text-gray-400 mb-2 md:mb-3">{stat.label}</p>
+                <p className="text-2xl md:text-3xl font-bold gradient-text">{stat.value}</p>
               </div>
             ))}
           </div>
 
-          <div className="glass-card rounded-3xl p-10 max-w-5xl mx-auto">
-            <h3 className="font-bold text-2xl mb-6 text-center gradient-text">Four-Pillar Engine</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {/* Core parameters */}
+          <div className="glass-card rounded-3xl p-6 md:p-10 max-w-5xl mx-auto mb-10">
+            <h3 className="font-bold text-2xl mb-6 text-center gradient-text">Core Parameters</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="text-sm uppercase tracking-wider text-accent-400 mb-3">Token</h4>
+                <dl className="space-y-2 text-sm md:text-base">
+                  {[
+                    ["Name", "OMNIGRAF"],
+                    ["Ticker", "$GRAF"],
+                    ["Chain", "Base (EVM L2)"],
+                    ["DEX", "Aerodrome Finance"],
+                    ["Total Supply", "1,000,000,000"],
+                    ["Mint Function", "None — Fixed Supply"],
+                  ].map(([k, v]) => (
+                    <div key={k} className="flex justify-between border-b border-white/5 py-1.5">
+                      <dt className="text-gray-400">{k}</dt>
+                      <dd className="font-semibold text-right">{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+              <div>
+                <h4 className="text-sm uppercase tracking-wider text-accent-400 mb-3">Pricing</h4>
+                <dl className="space-y-2 text-sm md:text-base">
+                  {[
+                    ["Launch FDV", "$4,500,000"],
+                    ["TGE Price", "$0.004500"],
+                    ["Presale Price", "$0.001539"],
+                    ["Discount", "65.8% below TGE"],
+                    ["Soft Cap", "$120,000 (full refund if missed)"],
+                    ["Hard Cap", "$360,000"],
+                  ].map(([k, v]) => (
+                    <div key={k} className="flex justify-between border-b border-white/5 py-1.5">
+                      <dt className="text-gray-400">{k}</dt>
+                      <dd className="font-semibold text-right">{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+          </div>
+
+          {/* Token allocation */}
+          <div className="glass-card rounded-3xl p-6 md:p-10 max-w-5xl mx-auto mb-10">
+            <h3 className="font-bold text-2xl mb-2 text-center gradient-text">Token Allocation</h3>
+            <p className="text-center text-gray-400 text-sm mb-6">1,000,000,000 total supply — verified</p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm md:text-base">
+                <thead>
+                  <tr className="text-left text-accent-400 uppercase text-xs tracking-wider">
+                    <th className="py-3 pr-4">Bucket</th>
+                    <th className="py-3 pr-4 text-right">Tokens</th>
+                    <th className="py-3 pr-4 text-right">%</th>
+                    <th className="py-3">Unlock Schedule</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Public Presale", "234,000,000", "23.4%", "50% at TGE · 50% stream daily over 15 months"],
+                    ["Referral Bonus Pool", "23,400,000", "2.3%", "100% at TGE to referrers"],
+                    ["Treasury / Graphene Council", "392,600,000", "39.3%", "Gnosis Safe 3-of-5 · cash-first draw rule"],
+                    ["Ecosystem / Staking", "150,000,000", "15.0%", "Fixed pool · daily drip 36 months"],
+                    ["Burn Reserve", "50,000,000", "5.0%", "$3M / $5M / $10M FDV milestone triggers"],
+                    ["Team & Founders", "50,000,000", "5.0%", "30-day cliff · 36-month Sablier stream"],
+                    ["Community Airdrop", "40,000,000", "4.0%", "50% TGE · 50% stream 15 months"],
+                    ["Marketing", "30,000,000", "3.0%", "12-month Sablier stream"],
+                    ["LP Pool (locked)", "30,000,000", "3.0%", "Locked in Aerodrome pool 24 months"],
+                  ].map(([bucket, tokens, pct, schedule]) => (
+                    <tr key={bucket} className="border-t border-white/5">
+                      <td className="py-3 pr-4 font-semibold">{bucket}</td>
+                      <td className="py-3 pr-4 text-right font-mono text-xs md:text-sm">{tokens}</td>
+                      <td className="py-3 pr-4 text-right font-bold">{pct}</td>
+                      <td className="py-3 text-gray-300 text-xs md:text-sm">{schedule}</td>
+                    </tr>
+                  ))}
+                  <tr className="border-t-2 border-accent-400/30">
+                    <td className="py-3 pr-4 font-bold gradient-text">TOTAL</td>
+                    <td className="py-3 pr-4 text-right font-mono font-bold">1,000,000,000</td>
+                    <td className="py-3 pr-4 text-right font-bold">100%</td>
+                    <td className="py-3 text-green-400 text-xs md:text-sm">Verified — no rounding errors</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-6 p-4 rounded-2xl border border-green-500/30 bg-green-500/5">
+              <p className="text-sm md:text-base text-green-300">
+                <span className="font-bold">Circulating at TGE: 160,400,000 (16.0%)</span> — 84% locked. Low float = supply discipline = price moves faster on organic buying.
+              </p>
+            </div>
+          </div>
+
+          {/* Trust signals */}
+          <div className="glass-card rounded-3xl p-6 md:p-10 max-w-5xl mx-auto">
+            <h3 className="font-bold text-2xl mb-6 text-center gradient-text">Launch Trust Stack</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {[
-                { icon: "💧", title: "Liquidity" },
-                { icon: "🏦", title: "Treasury (30%)" },
-                { icon: "🔥", title: "Burns (capped)" },
-                { icon: "🎁", title: "Rewards" },
+                { icon: "✅", title: "Audited — SolidProof" },
+                { icon: "🔒", title: "LP Locked 24 Months" },
+                { icon: "🪪", title: "Founders KYC Verified" },
+                { icon: "🛡️", title: "Gnosis Safe 3-of-5" },
+                { icon: "📊", title: "CoinGecko Listed" },
+                { icon: "🔥", title: "DEX Screener Boosted" },
               ].map((item, i) => (
-                <div key={i} className="bg-dark-200/50 rounded-xl p-6 hover:bg-dark-200/70 transition-all text-center">
-                  <span className="text-4xl block mb-2">{item.icon}</span>
-                  <h4 className="font-bold text-lg">{item.title}</h4>
+                <div key={i} className="bg-dark-200/50 rounded-xl p-4 md:p-5 hover:bg-dark-200/70 transition-all text-center">
+                  <span className="text-3xl block mb-2">{item.icon}</span>
+                  <h4 className="font-semibold text-sm md:text-base">{item.title}</h4>
                 </div>
               ))}
             </div>

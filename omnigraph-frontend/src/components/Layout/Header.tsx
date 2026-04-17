@@ -32,7 +32,7 @@ export function Header() {
                 alt="Omnigrafx Logo"
                 width={48}
                 height={48}
-                className="object-contain mix-blend-lighten"
+                className="object-contain"
                 priority
               />
             </div>
