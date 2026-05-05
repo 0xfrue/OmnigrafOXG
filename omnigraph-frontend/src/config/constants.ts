@@ -8,8 +8,12 @@ export const PROJECT_CONFIG = {
   PARENT_COMPANY: "ResolutX (formerly NorCalBio)",
 
   // Network
-  NETWORK: "Base",
-  CHAIN_ID: 8453,
+  NETWORK: "Solana",
+  SOLANA_CLUSTER: "mainnet-beta",
+  // Default public RPC — override with NEXT_PUBLIC_SOLANA_RPC for a private endpoint (Helius, Triton, etc.)
+  SOLANA_RPC: process.env.NEXT_PUBLIC_SOLANA_RPC || "https://api.mainnet-beta.solana.com",
+  // Mainnet USDC mint
+  USDC_MINT: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
 
   // Token Economics
   TOTAL_SUPPLY: "1,000,000,000",
@@ -24,10 +28,10 @@ export const PROJECT_CONFIG = {
   HARD_CAP: "$360,000",
   CIRCULATING_AT_TGE: "160,400,000",
   CIRCULATING_PCT: "16%",
-  DEX: "Aerodrome Finance",
+  DEX: "Jupiter",
 
   // Accepted Tokens
-  ACCEPTED_TOKENS: ["USDC", "ETH"],
+  ACCEPTED_TOKENS: ["USDC", "SOL"],
 
   // Sale Dates (UTC timestamps - update these)
   SALE_START_DATETIME: new Date("2024-03-15T00:00:00Z"),
@@ -58,12 +62,12 @@ export const PROJECT_CONFIG = {
   GEO_RESTRICTIONS_TEXT: "Participation may be restricted in certain jurisdictions including the United States. Please verify your eligibility before participating.",
 
   // Links & Addresses (placeholders)
-  TOKEN_CONTRACT_ADDRESS: "0x...", // Update after deployment
-  SALE_CONTRACT_ADDRESS: process.env.NEXT_PUBLIC_PRESALE_WALLET || "0x7A329d5A159f4025ddCfB1a78aE3809Fa824659c",
+  TOKEN_CONTRACT_ADDRESS: "TBD", // Update after deployment (Solana mint address)
+  SALE_CONTRACT_ADDRESS: process.env.NEXT_PUBLIC_PRESALE_WALLET || "663atiZucS388vR1i1p7vQAt5EHtLLMxf885FVLJmkgf",
   DOCS_URL: "/docs",
   SUPPORT_LINK: "mailto:support@resolutx.com",
   KYC_LINK: "/kyc",
-  BASE_EXPLORER_URL: "https://basescan.org",
+  BASE_EXPLORER_URL: "https://solscan.io",
 
   // Social Links
   TWITTER_URL: "https://x.com/OmnigrafOGX",

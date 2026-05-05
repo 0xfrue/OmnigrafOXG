@@ -2,311 +2,320 @@
 
 import Head from "next/head";
 import Link from "next/link";
-import { PROJECT_CONFIG } from "@/config/constants";
-import { TrustStrip } from "@/components/Presale/TrustStrip";
-import { VideoBackground } from "@/components/Effects/VideoBackground";
-import { FloatingParticles } from "@/components/Effects/FloatingParticles";
+import { useEffect, useState } from "react";
+
+const PRESALE_START = new Date("2026-05-05T12:00:00");
+
+function useFadeUp() {
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+    document.querySelectorAll(".fade-up").forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+}
+
+function Countdown() {
+  const [t, setT] = useState({ d: "--", h: "--", m: "--", s: "--" });
+  useEffect(() => {
+    const tick = () => {
+      const diff = PRESALE_START.getTime() - Date.now();
+      if (diff <= 0) {
+        setT({ d: "00", h: "00", m: "00", s: "00" });
+        return;
+      }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      const pad = (n: number) => String(n).padStart(2, "0");
+      setT({ d: pad(d), h: pad(h), m: pad(m), s: pad(s) });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="presale-countdown fade-up">
+      <div className="countdown-label">Presale Opens In</div>
+      <div className="countdown-timer">
+        <div className="countdown-unit"><span>{t.d}</span><small>Days</small></div>
+        <div className="countdown-sep">:</div>
+        <div className="countdown-unit"><span>{t.h}</span><small>Hours</small></div>
+        <div className="countdown-sep">:</div>
+        <div className="countdown-unit"><span>{t.m}</span><small>Min</small></div>
+        <div className="countdown-sep">:</div>
+        <div className="countdown-unit"><span>{t.s}</span><small>Sec</small></div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
+  useFadeUp();
+
   return (
     <>
       <Head>
-        <title>Omnigrafx - Built on Base</title>
-        <meta name="description" content="Omnigrafx - Real Graphene Utility On-chain. Built on Base Network. Token Coming Soon." />
+        <title>OMNIGRAF ($GRAF) — Real Graphene Utility On-Chain | Built on Solana</title>
+        <meta name="description" content="OMNIGRAF is a DeSci utility token funding graphene research and production coordination on Solana. Fixed supply. Audited. LP locked 24 months." />
       </Head>
 
-      <VideoBackground />
-      <FloatingParticles />
-
-      <div className="container mx-auto px-4 py-8 relative z-20">
-        {/* HERO - Ultra Modern with Video */}
-        <section className="relative text-center mb-20 py-24">
-          {/* Reduced opacity gradients to let video show through */}
-          <div className="absolute inset-0 bg-gradient-to-br from-base-blue/10 via-accent-500/5 to-purple-500/10 gradient-shift rounded-[3rem] blur-3xl -z-10" />
-          <div className="absolute inset-0 bg-gradient-to-tl from-blue-600/10 via-transparent to-cyan-500/10 animate-pulse opacity-30 rounded-[3rem] blur-2xl -z-10" />
-
-          {/* Centered Logo */}
-          <div className="flex justify-center mb-8 md:mb-10">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-base-blue/50 ring-4 ring-base-blue/30 morph-border pulse-ring magnetic-hover glow-base">
-              <img
-                src="/omnigraf-logo.png"
-                alt="Omnigrafx Logo"
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
-
-          {/* BASE Badge */}
-          <div className="flex justify-center mb-8 md:mb-10">
-            <div className="inline-flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 py-2 sm:py-3 glass-card rounded-full glow-base pulse-ring">
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 111 111" fill="none">
-                <path d="M54.921 110.034C85.359 110.034 110.034 85.402 110.034 55.017C110.034 24.6319 85.359 0 54.921 0C26.0432 0 2.35281 22.1714 0 50.3923H72.8467V59.6416H0C2.35281 87.8625 26.0432 110.034 54.921 110.034Z" fill="#0052FF"/>
-              </svg>
-              <span className="text-sm sm:text-base font-bold text-base-blue neon-base">OMNIGRAFX BUILT ON BASE</span>
-              <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400 animate-pulse" />
-            </div>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 md:mb-8 px-4">
-            <span className="gradient-text neon-base block">SpaceX Proved It Real</span>
-            <span className="gradient-text neon-base block">Graphene in orbit.</span>
-            <span className="gradient-text neon-base block mt-4">AI Demands It</span>
-            <span className="gradient-text neon-base block">Real Utility On-chain.</span>
+      {/* HERO */}
+      <section className="hero">
+        <div className="hero-bg">
+          <img src="/images/hero-bg.jpg" alt="Graphene hexagonal lattice with blockchain visualization" loading="eager" />
+        </div>
+        <div className="hero-content fade-up">
+          <h1>
+            65.8% Below Launch Price.<br />
+            <span className="gradient-text">You&apos;re Early.</span>
           </h1>
-
-          <p className="text-gray-300 text-xl sm:text-2xl md:text-4xl max-w-5xl mx-auto mb-6 md:mb-8 font-semibold leading-relaxed px-4">
-            <span className="text-base-blue">Token Coming Soon to Base.</span>
+          <p className="hero-sub">
+            $GRAF is the payment token for the graphene economy — used by distributors, vendors, buyers, and sellers across the supply chain. Backed by industry leaders who build with it, trade with it, and support it. Fixed supply. No mint function. When the presale closes, this price is gone.{" "}
+            <Link href="/tokenomics" style={{ color: "var(--accent-cyan)", borderBottom: "1px solid var(--accent-cyan)" }}>84% locked at launch.</Link>
           </p>
 
-          {/* Join Presale CTA - Primary */}
-          <div className="flex justify-center mb-12">
-            <Link href="/presale">
-              <button className="px-8 py-4 md:px-12 md:py-5 bg-gradient-to-r from-base-blue via-purple-500 to-cyan-500 rounded-2xl font-bold text-base md:text-lg shadow-2xl shadow-base-blue/50 hover:-translate-y-2 liquid-button magnetic-hover ripple transition-all duration-300 hover:shadow-base-blue/70">
-                Join Presale
-              </button>
-            </Link>
+          <Countdown />
+
+          <div className="hero-actions">
+            <Link href="/presale" className="btn btn-primary" data-burst="true">Reserve Your Allocation →</Link>
+            <Link href="/science" className="btn btn-secondary">Read the Science</Link>
           </div>
 
-          {/* 3D Feature Cards */}
-          <div className="max-w-5xl mx-auto mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: "⚡", text: "Lightning-fast on Base" },
-              { icon: "🔒", text: `Fixed: ${PROJECT_CONFIG.TOTAL_SUPPLY}` },
-              { icon: "🛡️", text: "Safety-first design" },
-            ].map((item, i) => (
-              <div key={i} className="glass-card rounded-2xl p-6 card-3d magnetic-hover shimmer">
-                <div className="text-4xl mb-3">{item.icon}</div>
-                <p className="text-sm font-medium">{item.text}</p>
-              </div>
-            ))}
+          <div className="hero-trust-row">
+            <a href="https://app.solidproof.io/projects/omnigraf" target="_blank" rel="noopener noreferrer" className="hero-trust-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: "-2px", marginRight: "4px" }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+              Audited by SolidProof
+            </a>
+            <a href="https://uncx.network/" target="_blank" rel="noopener noreferrer" className="hero-trust-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: "-2px", marginRight: "4px" }}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              LP Locked 24mo via UNCX
+            </a>
+            <a href="https://solscan.io/account/0x7A329d5A159f4025ddCfB1a78aE3809Fa824659c" target="_blank" rel="noopener noreferrer" className="hero-trust-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: "-2px", marginRight: "4px" }}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+              View Contract on Solscan
+            </a>
           </div>
+        </div>
+      </section>
 
-          {/* Price */}
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-6">
-            <div className="glass-card px-8 py-4 rounded-2xl pulse-ring">
-              <span className="text-gray-400 text-sm block mb-1">TGE Price</span>
-              <span className="font-bold text-4xl gradient-text">TBD</span>
+      {/* CREDIBILITY BAND */}
+      <section className="credibility-band">
+        <div className="container">
+          <div className="cred-label">
+            <div style={{ marginBottom: 6, color: "var(--text-primary)" }}>Graphene</div>
+            <div>Backed by Real Science and Industry</div>
+          </div>
+          <div className="cred-row">
+            <div className="cred-col">
+              <div className="cred-img-wrap"><img src="/images/cred-gc.png" alt="The Graphene Council" width="64" height="64" /></div>
+              <strong>Graphene Council</strong>
+              <span>Industry body for graphene commercialization</span>
             </div>
-            <div className="hidden md:block text-4xl text-gray-600">•</div>
-            <div className="glass-card px-8 py-4 rounded-2xl">
-              <span className="text-gray-400 text-sm block mb-1">Payment</span>
-              <span className="font-bold text-2xl">USDC / ETH</span>
+            <div className="cred-col">
+              <div className="cred-img-wrap"><img src="/images/cred-rx.png" alt="ResolutX" width="130" height="46" /></div>
+              <strong>ResolutX</strong>
+              <span>Carbon-neutral graphene production</span>
+            </div>
+            <div className="cred-col">
+              <div className="cred-circle"><img src="/images/cred-spacex-circle.png" alt="SpaceX" /></div>
+              <strong>SpaceX</strong>
+              <span>Graphene tested in orbit on SpaceX missions</span>
+            </div>
+            <div className="cred-col">
+              <div className="cred-circle"><img src="/images/cred-barkan-circle.png" alt="Terrance Barkan" /></div>
+              <strong>Terrance Barkan</strong>
+              <span>Executive Director, The Graphene Council</span>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Launching Soon */}
-          <p className="text-center text-lg sm:text-xl md:text-2xl text-accent-400 font-semibold mb-12">
-            Launching Soon — Join Waitlist
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-6 px-4">
-            <Link href="/presale">
-              <button className="px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-base-blue to-accent-500 rounded-2xl font-bold text-sm md:text-lg shadow-2xl shadow-base-blue/50 hover:-translate-y-2 transition-all duration-500 magnetic-hover">
-                🚀 Join Presale
-              </button>
-            </Link>
-            <Link href="/faq">
-              <button className="px-6 py-3 md:px-10 md:py-5 glass-card border-2 border-base-blue/50 hover:border-base-blue rounded-2xl font-bold text-sm md:text-lg transition-all duration-500 hover:-translate-y-2 magnetic-hover">
-                FAQ & Due Diligence
-              </button>
-            </Link>
+      {/* TRUST BAR */}
+      <section className="trust-bar">
+        <div className="container">
+          <div className="trust-strip">
+            <div className="trust-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Fixed supply — no mint function
+            </div>
+            <div className="trust-pill">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              LP locked 24 months
+            </div>
+            <div className="trust-pill">
+              <img src="/images/logo-solidproof.png" alt="SolidProof" width="18" height="18" style={{ borderRadius: 4 }} />
+              Audited by SolidProof
+            </div>
+            <div className="trust-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Squads 3-of-5
+            </div>
+            <div className="trust-pill">
+              <svg width="16" height="16" viewBox="0 0 397.7 311.7" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="solg1" x1="360.879" y1="351.455" x2="141.213" y2="-69.294" gradientTransform="matrix(1 0 0 -1 0 314)" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#00ffa3"/><stop offset="1" stopColor="#dc1fff"/></linearGradient><linearGradient id="solg2" x1="264.829" y1="401.601" x2="45.163" y2="-19.148" gradientTransform="matrix(1 0 0 -1 0 314)" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#00ffa3"/><stop offset="1" stopColor="#dc1fff"/></linearGradient><linearGradient id="solg3" x1="312.548" y1="376.688" x2="92.882" y2="-44.061" gradientTransform="matrix(1 0 0 -1 0 314)" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#00ffa3"/><stop offset="1" stopColor="#dc1fff"/></linearGradient></defs><path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1z" fill="url(#solg1)"/><path d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1z" fill="url(#solg2)"/><path d="M333.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1z" fill="url(#solg3)"/></svg>
+              Built on Solana
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <TrustStrip />
-
-        {/* GRAPHENE SECTION */}
-        <section className="my-16 md:my-24">
-          <div className="text-center mb-12 md:mb-16 px-4">
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 md:mb-6 gradient-text neon-base">The Material of the Future</h2>
-            <p className="text-gray-300 text-base sm:text-lg md:text-xl max-w-5xl mx-auto">
-              200x stronger than steel • Highly conductive • Nearly transparent
+      {/* APPLICATIONS */}
+      <section className="section" id="applications">
+        <div className="container">
+          <div className="section-header fade-up">
+            <div className="section-label">Real-World Applications</div>
+            <h2 className="section-title">The Material That Changes Everything</h2>
+            <p className="section-desc">
+              200x stronger than steel. Better conductor than copper. One atom thick. Graphene is already inside SpaceX components, Samsung prototypes, and military-grade composites. Here&apos;s where the market is going.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="app-grid">
             {[
-              { title: "Energy & Power", icon: "⚡" },
-              { title: "Electronics", icon: "💻" },
-              { title: "Materials", icon: "🏗️" },
-              { title: "Sensors", icon: "📡" },
-              { title: "Water Tech", icon: "💧" },
-              { title: "Industrial", icon: "🏭" },
-            ].map((item, i) => (
-              <div key={i} className="glass-card rounded-3xl p-8 card-3d shimmer group cursor-pointer text-center">
-                <div className="text-6xl mb-4 scale-pulse">{item.icon}</div>
-                <h3 className="font-bold text-2xl group-hover:text-base-blue transition-colors">{item.title}</h3>
-                <div className="mt-4 w-full h-1 bg-gradient-to-r from-base-blue to-accent-500 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12 glass-card rounded-3xl p-8 max-w-4xl mx-auto">
-            <p className="text-2xl font-bold gradient-text">{PROJECT_CONFIG.PROJECT_NAME} Shaping Tomorrow’s Blockchain Engineered for Performance Powered by Community.
-</p>
-          </div>
-        </section>
-
-        {/* TOKENOMICS */}
-        <section className="my-16 md:my-24" id="tokenomics">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-center gradient-text neon-base px-4">Tokenomics</h2>
-          <p className="text-center text-gray-400 text-sm sm:text-base mb-10 md:mb-12 px-4">
-            OMNIGRAF · $GRAF · Base (Aerodrome) · 1,000,000,000 fixed supply · no mint function
-          </p>
-
-          {/* Headline stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-12 max-w-5xl mx-auto">
-            {[
-              { label: "Launch FDV", value: PROJECT_CONFIG.LAUNCH_FDV },
-              { label: "Buyer ROI Day 1", value: "+46%" },
-              { label: "Circulating Float", value: PROJECT_CONFIG.CIRCULATING_PCT },
-              { label: "Hard Cap Raise", value: "$360K" },
-              { label: "Peak FDV (Hard Cap)", value: PROJECT_CONFIG.PEAK_FDV },
-              { label: "Pool Deaths (Monte Carlo)", value: "0 / 50K" },
-            ].map((stat, i) => (
-              <div key={i} className="glass-card rounded-2xl p-6 md:p-8 text-center card-3d magnetic-hover shimmer">
-                <p className="text-xs sm:text-sm text-gray-400 mb-2 md:mb-3">{stat.label}</p>
-                <p className="text-2xl md:text-3xl font-bold gradient-text">{stat.value}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Core parameters */}
-          <div className="glass-card rounded-3xl p-6 md:p-10 max-w-5xl mx-auto mb-10">
-            <h3 className="font-bold text-2xl mb-6 text-center gradient-text">Core Parameters</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="text-sm uppercase tracking-wider text-accent-400 mb-3">Token</h4>
-                <dl className="space-y-2 text-sm md:text-base">
-                  {[
-                    ["Name", "OMNIGRAF"],
-                    ["Ticker", "$GRAF"],
-                    ["Chain", "Base (EVM L2)"],
-                    ["DEX", "Aerodrome Finance"],
-                    ["Total Supply", "1,000,000,000"],
-                    ["Mint Function", "None — Fixed Supply"],
-                  ].map(([k, v]) => (
-                    <div key={k} className="flex justify-between border-b border-white/5 py-1.5">
-                      <dt className="text-gray-400">{k}</dt>
-                      <dd className="font-semibold text-right">{v}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-              <div>
-                <h4 className="text-sm uppercase tracking-wider text-accent-400 mb-3">Pricing</h4>
-                <dl className="space-y-2 text-sm md:text-base">
-                  {[
-                    ["Launch FDV", "$4,500,000"],
-                    ["TGE Price", "$0.004500"],
-                    ["Presale Price", "$0.001539"],
-                    ["Discount", "65.8% below TGE"],
-                    ["Soft Cap", "$120,000 (full refund if missed)"],
-                    ["Hard Cap", "$360,000"],
-                  ].map(([k, v]) => (
-                    <div key={k} className="flex justify-between border-b border-white/5 py-1.5">
-                      <dt className="text-gray-400">{k}</dt>
-                      <dd className="font-semibold text-right">{v}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
-          </div>
-
-          {/* Token allocation */}
-          <div className="glass-card rounded-3xl p-6 md:p-10 max-w-5xl mx-auto mb-10">
-            <h3 className="font-bold text-2xl mb-2 text-center gradient-text">Token Allocation</h3>
-            <p className="text-center text-gray-400 text-sm mb-6">1,000,000,000 total supply — verified</p>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm md:text-base">
-                <thead>
-                  <tr className="text-left text-accent-400 uppercase text-xs tracking-wider">
-                    <th className="py-3 pr-4">Bucket</th>
-                    <th className="py-3 pr-4 text-right">Tokens</th>
-                    <th className="py-3 pr-4 text-right">%</th>
-                    <th className="py-3">Unlock Schedule</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ["Public Presale", "234,000,000", "23.4%", "50% at TGE · 50% stream daily over 15 months"],
-                    ["Referral Bonus Pool", "23,400,000", "2.3%", "100% at TGE to referrers"],
-                    ["Treasury / Graphene Council", "392,600,000", "39.3%", "Gnosis Safe 3-of-5 · cash-first draw rule"],
-                    ["Ecosystem / Staking", "150,000,000", "15.0%", "Fixed pool · daily drip 36 months"],
-                    ["Burn Reserve", "50,000,000", "5.0%", "$3M / $5M / $10M FDV milestone triggers"],
-                    ["Team & Founders", "50,000,000", "5.0%", "30-day cliff · 36-month Sablier stream"],
-                    ["Community Airdrop", "40,000,000", "4.0%", "50% TGE · 50% stream 15 months"],
-                    ["Marketing", "30,000,000", "3.0%", "12-month Sablier stream"],
-                    ["LP Pool (locked)", "30,000,000", "3.0%", "Locked in Aerodrome pool 24 months"],
-                  ].map(([bucket, tokens, pct, schedule]) => (
-                    <tr key={bucket} className="border-t border-white/5">
-                      <td className="py-3 pr-4 font-semibold">{bucket}</td>
-                      <td className="py-3 pr-4 text-right font-mono text-xs md:text-sm">{tokens}</td>
-                      <td className="py-3 pr-4 text-right font-bold">{pct}</td>
-                      <td className="py-3 text-gray-300 text-xs md:text-sm">{schedule}</td>
-                    </tr>
-                  ))}
-                  <tr className="border-t-2 border-accent-400/30">
-                    <td className="py-3 pr-4 font-bold gradient-text">TOTAL</td>
-                    <td className="py-3 pr-4 text-right font-mono font-bold">1,000,000,000</td>
-                    <td className="py-3 pr-4 text-right font-bold">100%</td>
-                    <td className="py-3 text-green-400 text-xs md:text-sm">Verified — no rounding errors</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="mt-6 p-4 rounded-2xl border border-green-500/30 bg-green-500/5">
-              <p className="text-sm md:text-base text-green-300">
-                <span className="font-bold">Circulating at TGE: 160,400,000 (16.0%)</span> — 84% locked. Low float = supply discipline = price moves faster on organic buying.
-              </p>
-            </div>
-          </div>
-
-          {/* Trust signals */}
-          <div className="glass-card rounded-3xl p-6 md:p-10 max-w-5xl mx-auto">
-            <h3 className="font-bold text-2xl mb-6 text-center gradient-text">Launch Trust Stack</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[
-                { icon: "✅", title: "Audited — SolidProof" },
-                { icon: "🔒", title: "LP Locked 24 Months" },
-                { icon: "🪪", title: "Founders KYC Verified" },
-                { icon: "🛡️", title: "Gnosis Safe 3-of-5" },
-                { icon: "📊", title: "CoinGecko Listed" },
-                { icon: "🔥", title: "DEX Screener Boosted" },
-              ].map((item, i) => (
-                <div key={i} className="bg-dark-200/50 rounded-xl p-4 md:p-5 hover:bg-dark-200/70 transition-all text-center">
-                  <span className="text-3xl block mb-2">{item.icon}</span>
-                  <h4 className="font-semibold text-sm md:text-base">{item.title}</h4>
+              { img: "energy.jpg", title: "Energy & Power", items: ["Next-gen batteries: faster charging, higher capacity", "Supercapacitors: rapid energy storage and release", "Solar cells: improved efficiency and flexibility", "Fuel cells: better catalytic performance"], market: "Used by companies building EV batteries and grid-scale energy storage." },
+              { img: "electronics.jpg", title: "Electronics", items: ["Flexible displays: bendable, transparent screens", "High-speed transistors: faster computing", "Touch screens: transparent conductive layers", "Quantum computing: single-electron transistors"], market: "Samsung, IBM, and others investing in graphene electronics R&D." },
+              { img: "materials.jpg", title: "Materials & Composites", items: ["Advanced composites: aerospace, automotive strength", "Protective coatings: anti-corrosion, wear-resistant", "Concrete reinforcement: stronger infrastructure", "Lightweight armor: defense applications"], market: "Construction, aerospace, and defense sectors adopting graphene composites." },
+              { img: "sensors.jpg", title: "Sensors & Detection", items: ["Biosensors: medical diagnostics, drug delivery", "Environmental sensors: pollution detection", "Chemical sensors: industrial safety monitoring", "Strain sensors: structural health monitoring"], market: "Medical device companies exploring graphene-based diagnostics." },
+              { img: "water.jpg", title: "Water & Filtration", items: ["Desalination: graphene oxide membranes", "Water purification: contaminant removal", "Gas separation: industrial filtration", "Air filtration: ultra-efficient filters"], market: "Addressing global water scarcity with membrane filtration tech." },
+              { img: "industrial.jpg", title: "Industrial Applications", items: ["Lubricants: reduced friction, wear protection", "Anti-corrosion coatings: marine, infrastructure", "Thermal management: heat dissipation in electronics", "3D printing: graphene-enhanced materials"], market: "Manufacturers integrating graphene for performance and longevity." },
+            ].map((card) => (
+              <div key={card.title} className="app-card fade-up">
+                <img src={`/images/${card.img}`} alt={card.title} className="app-card-img" loading="lazy" />
+                <div className="app-card-body">
+                  <h3 className="app-card-title">{card.title}</h3>
+                  <ul className="app-card-list">
+                    {card.items.map((it) => <li key={it}>{it}</li>)}
+                  </ul>
+                  <p className="app-card-market">{card.market}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* PRESALE CTA SECTION */}
-        <section className="my-16 md:my-24">
-          <div className="max-w-2xl mx-auto text-center glass-card rounded-3xl p-8 md:p-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 gradient-text neon-base">Join the Presale</h2>
-            <p className="text-gray-400 text-sm sm:text-base md:text-lg mb-8 max-w-xl mx-auto">
-              Purchase GRAF tokens with USDC or ETH on Base network.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/presale">
-                <button className="px-8 py-4 bg-gradient-to-r from-base-blue to-accent-500 rounded-2xl font-bold text-base shadow-2xl shadow-base-blue/50 hover:-translate-y-2 transition-all duration-300 magnetic-hover">
-                  Buy Tokens
-                </button>
-              </Link>
-              <Link href="/faq">
-                <button className="px-8 py-4 glass-card border-2 border-base-blue/50 rounded-2xl font-bold text-base hover:-translate-y-2 transition-all duration-300 magnetic-hover">
-                  FAQ & Due Diligence
-                </button>
-              </Link>
+      {/* TOKENOMICS SNAPSHOT */}
+      <section className="tokenomics-hero" id="tokenomics">
+        <div className="section-bg">
+          <img src="/images/tokenomics-bg.jpg" alt="Token economics visualization" loading="lazy" />
+        </div>
+        <div className="container tokenomics-content">
+          <div className="section-header fade-up">
+            <div className="section-label">Tokenomics</div>
+            <h2 className="section-title">Designed for Stability, Not Speculation</h2>
+            <div className="token-meta">
+              OMNIGRAF <span>·</span> $GRAF <span>·</span> Solana (Jupiter) <span>·</span> 1,000,000,000 fixed supply <span>·</span> no mint function
             </div>
           </div>
-        </section>
-      </div>
+
+          <div className="stats-grid fade-up">
+            <div className="stat-card"><div className="stat-label">Launch FDV</div><div className="stat-value cyan">$4.5M</div></div>
+            <div className="stat-card"><div className="stat-label">Presale Discount</div><div className="stat-value green">65.8%</div></div>
+            <div className="stat-card"><div className="stat-label">Circulating Float</div><div className="stat-value gold">16%</div></div>
+            <div className="stat-card"><div className="stat-label">Hard Cap Raise</div><div className="stat-value cyan">$360K</div></div>
+            <div className="stat-card"><div className="stat-label">Peak FDV (Hard Cap)</div><div className="stat-value green">$9.7M</div></div>
+            <div className="stat-card"><div className="stat-label">Pool Deaths (Monte Carlo)</div><div className="stat-value gold">0 / 50K</div></div>
+          </div>
+
+          <div className="fade-up" style={{ overflowX: "auto" }}>
+            <table className="allocation-table">
+              <thead>
+                <tr><th>Bucket</th><th>Tokens</th><th>%</th><th>Unlock Schedule</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Public Presale</td><td>234,000,000</td><td>23.4%</td><td>50% at TGE · 50% stream daily over 15 months</td></tr>
+                <tr><td>Referral Bonus Pool</td><td>23,400,000</td><td>2.3%</td><td>100% at TGE to referrers</td></tr>
+                <tr><td>Treasury / Graphene Council</td><td>392,600,000</td><td>39.3%</td><td>Squads 3-of-5 · cash-first draw rule</td></tr>
+                <tr><td>Ecosystem / Staking</td><td>150,000,000</td><td>15.0%</td><td>Fixed pool · daily drip 36 months</td></tr>
+                <tr><td>Burn Reserve</td><td>50,000,000</td><td>5.0%</td><td>$3M / $5M / $10M FDV milestone triggers</td></tr>
+                <tr><td>Team & Founders</td><td>50,000,000</td><td>5.0%</td><td>30-day cliff · 36-month Sablier stream</td></tr>
+                <tr><td>Community Airdrop</td><td>40,000,000</td><td>4.0%</td><td>50% TGE · 50% stream 15 months</td></tr>
+                <tr><td>Marketing</td><td>30,000,000</td><td>3.0%</td><td>12-month Sablier stream</td></tr>
+                <tr><td>LP Pool (locked)</td><td>30,000,000</td><td>3.0%</td><td>Locked in Jupiter pool 24 months</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><td>TOTAL</td><td>1,000,000,000</td><td>100%</td><td>Verified — no rounding errors</td></tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <div className="float-note fade-up">
+            <strong>Circulating at TGE: 160,400,000 (16.0%)</strong> — 84% locked. Low float creates supply discipline. The team is on a 36-month stream — they can&apos;t sell at launch any more than you can.
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: 40 }}>
+            <Link href="/tokenomics" className="btn btn-secondary">Full Tokenomics Breakdown →</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* TRUST STACK */}
+      <section className="section section-alt" id="trust">
+        <div className="container">
+          <div className="section-header fade-up">
+            <div className="section-label">Verification</div>
+            <h2 className="section-title">Don&apos;t Trust. Verify.</h2>
+            <p className="section-desc">Every claim is on-chain. Every contract is public. Every lock is verifiable. Here&apos;s the trust stack.</p>
+          </div>
+
+          <div className="trust-grid fade-up">
+            <div className="trust-card">
+              <div className="trust-card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
+              <h4>Audited — SolidProof</h4>
+              <p>Independent smart contract review. Every function examined. Badge live on DEX Screener.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+              <h4>LP Locked 24 Months</h4>
+              <p>$25,000 liquidity locked on UNCX before TGE. Cannot be removed. Verifiable by anyone.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M2 7h20"></path><path d="M9 21h6"></path><path d="M12 17v4"></path></svg></div>
+              <h4>Founders KYC Verified</h4>
+              <p>Team identities verified through SolidProof KYC process. Real people, real accountability.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+              <h4>Squads 3-of-5</h4>
+              <p>Treasury requires 3 separate signers to move funds. No single person controls the wallet.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon"><img src="/images/logo-coingecko.png" alt="CoinGecko" width="36" height="36" /></div>
+              <h4>CoinGecko Listed</h4>
+              <p>Public listing with verified metrics. Track price, volume, and market cap in real time.</p>
+            </div>
+            <div className="trust-card">
+              <div className="trust-card-icon"><img src="/images/logo-dexscreener.png" alt="DEX Screener" width="36" height="36" /></div>
+              <h4>DEX Screener Boosted</h4>
+              <p>Visible on the most-used DEX analytics platform. Transparent trading data from day one.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="cta-section">
+        <div className="container">
+          <div className="cta-content fade-up">
+            <h2>The Presale Opens Soon</h2>
+            <p>65.8% below TGE price. Fixed supply. No mint function. Review the contracts, then decide.</p>
+            <div className="hero-actions">
+              <Link href="/presale" className="btn btn-primary" data-burst="true">Reserve Your Allocation →</Link>
+              <Link href="/faq" className="btn btn-secondary">FAQ &amp; Due Diligence</Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

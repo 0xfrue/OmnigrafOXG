@@ -2,305 +2,169 @@
 
 import Head from "next/head";
 import Link from "next/link";
-import { PROJECT_CONFIG, COMPLIANCE, PLACEHOLDERS } from "@/config/constants";
+import { useEffect } from "react";
 
 export default function HowItWorksPage() {
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add("visible"), obs.unobserve(e.target))),
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+    document.querySelectorAll(".fade-up").forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <>
       <Head>
-        <title>How It Works | {PROJECT_CONFIG.PROJECT_NAME}</title>
-        <meta
-          name="description"
-          content="Understand the token mechanics, liquidity support design, and safety features of Graphene Token."
-        />
+        <title>How $GRAF Works — OMNIGRAF Token Mechanics</title>
+        <meta name="description" content="Token mechanics, fee distribution, safety features, and the ecosystem alignment model. All verifiable on-chain." />
       </Head>
 
-      <div className="container mx-auto px-4 py-12">
-        {/* Hero */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-6 gradient-text">How It Works</h1>
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto">
-            Understanding the token mechanics, ecosystem alignment, and safety-first design philosophy.
-          </p>
+      <section className="page-hero">
+        <div className="hero-bg">
+          <img src="/images/trust-security.jpg" alt="Blockchain security" loading="eager" />
         </div>
+        <div className="container page-hero-content">
+          <h1>How the $GRAF Token Works</h1>
+          <p>Token mechanics, fee distribution, safety features, and the ecosystem alignment model. All verifiable on-chain.</p>
+        </div>
+      </section>
 
-        {/* Token Overview */}
-        <section className="mb-16">
-          <div className="bg-dark-200/50 backdrop-blur-sm rounded-2xl p-8 border border-base-blue/20">
-            <h2 className="text-3xl font-bold mb-6 gradient-text">Token Overview</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="font-bold text-xl mb-4 text-base-blue">Basic Information</h3>
-                <dl className="space-y-3">
-                  <div>
-                    <dt className="text-sm text-gray-400">Token Name</dt>
-                    <dd className="text-lg font-semibold">{PROJECT_CONFIG.PROJECT_NAME}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-gray-400">Symbol</dt>
-                    <dd className="text-lg font-semibold">{PROJECT_CONFIG.TOKEN_SYMBOL}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-gray-400">Network</dt>
-                    <dd className="text-lg font-semibold">{PROJECT_CONFIG.NETWORK}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-gray-400">Total Supply</dt>
-                    <dd className="text-lg font-semibold">{PROJECT_CONFIG.TOTAL_SUPPLY}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-gray-400">TGE Price</dt>
-                    <dd className="text-lg font-semibold">{PROJECT_CONFIG.TGE_PRICE}</dd>
-                  </div>
-                </dl>
-              </div>
-              <div>
-                <h3 className="font-bold text-xl mb-4 text-accent-400">Safety Features</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>Fixed supply:</strong> No unlimited minting</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>Hard caps:</strong> Buy tax ≤{PROJECT_CONFIG.MAX_BUY_TAX}, Sell tax ≤{PROJECT_CONFIG.MAX_SELL_TAX}</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>LP lock design:</strong> Liquidity timelock mechanism</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>Time-delayed governance:</strong> No instant parameter changes</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>Claim-on-demand vesting:</strong> No forced claims</span>
-                  </li>
-                </ul>
-              </div>
+      <section className="section">
+        <div className="container">
+          <div className="section-header fade-up">
+            <div className="section-label">Overview</div>
+            <h2 className="section-title">Token Parameters</h2>
+          </div>
+
+          <div className="params-grid fade-up">
+            <div className="params-card">
+              <h3>Token</h3>
+              <div className="param-row"><span className="param-key">Name</span><span className="param-val">OMNIGRAF</span></div>
+              <div className="param-row"><span className="param-key">Ticker</span><span className="param-val">$GRAF</span></div>
+              <div className="param-row"><span className="param-key">Chain</span><span className="param-val">Solana</span></div>
+              <div className="param-row"><span className="param-key">DEX</span><span className="param-val">Jupiter</span></div>
+              <div className="param-row"><span className="param-key">Total Supply</span><span className="param-val">1,000,000,000</span></div>
+              <div className="param-row"><span className="param-key">Mint Function</span><span className="param-val" style={{ color: "var(--accent-green)" }}>None — Fixed</span></div>
+            </div>
+            <div className="params-card">
+              <h3>Pricing</h3>
+              <div className="param-row"><span className="param-key">Launch FDV</span><span className="param-val">$4,500,000</span></div>
+              <div className="param-row"><span className="param-key">TGE Price</span><span className="param-val">$0.004500</span></div>
+              <div className="param-row"><span className="param-key">Presale Price</span><span className="param-val" style={{ color: "var(--accent-green)" }}>$0.001539</span></div>
+              <div className="param-row"><span className="param-key">Discount</span><span className="param-val">65.8% below TGE</span></div>
+              <div className="param-row"><span className="param-key">Soft Cap</span><span className="param-val">$120,000</span></div>
+              <div className="param-row"><span className="param-key">Hard Cap</span><span className="param-val">$360,000</span></div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Token Engine (4 outcomes) */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center gradient-text">What the Token Engine Does</h2>
-          <p className="text-gray-300 text-lg text-center max-w-4xl mx-auto mb-12">
-            Transaction fees are automatically distributed to support four key ecosystem outcomes:
-          </p>
+      <section className="section section-alt">
+        <div className="container">
+          <div className="section-header fade-up">
+            <div className="section-label">Fee Distribution</div>
+            <h2 className="section-title">What the Token Engine Does</h2>
+            <p className="section-desc">Transaction fees are distributed automatically to four ecosystem functions. No manual intervention. No central authority.</p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl p-8 border border-blue-500/20">
-              <div className="text-4xl mb-4">💧</div>
-              <h3 className="font-bold text-2xl mb-4 text-blue-400">1. Liquidity Strengthening</h3>
-              <p className="text-gray-300 mb-4">
-                Protocol-owned liquidity (POL) design ensures the ecosystem can maintain healthy trading conditions over time.
-              </p>
-              <ul className="text-sm text-gray-400 space-y-2">
-                <li>• Automatic LP provision from fees</li>
-                <li>• Reduced reliance on individual LPs</li>
-                <li>• Long-term liquidity stability</li>
+          <div className="engine-grid fade-up">
+            <div className="engine-card">
+              <div className="engine-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg></div>
+              <h4>Liquidity Strengthening</h4>
+              <p>Protocol-owned liquidity (POL) design keeps trading conditions healthy over time.</p>
+              <ul className="engine-list">
+                <li>Automatic LP provision from fees</li>
+                <li>Reduced reliance on individual LPs</li>
+                <li>Long-term liquidity stability</li>
               </ul>
             </div>
-
-            <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl p-8 border border-green-500/20">
-              <div className="text-4xl mb-4">🏦</div>
-              <h3 className="font-bold text-2xl mb-4 text-green-400">2. Treasury Support</h3>
-              <p className="text-gray-300 mb-4">
-                Ecosystem development treasury funds research collaboration, partnerships, and infrastructure.
-              </p>
-              <ul className="text-sm text-gray-400 space-y-2">
-                <li>• Graphene R&D funding</li>
-                <li>• Ecosystem partnerships</li>
-                <li>• Education and awareness initiatives</li>
+            <div className="engine-card">
+              <div className="engine-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></div>
+              <h4>Treasury Support</h4>
+              <p>Ecosystem development treasury funds research, partnerships, and infrastructure.</p>
+              <ul className="engine-list">
+                <li>Graphene R&amp;D coordination funding</li>
+                <li>Ecosystem partnerships</li>
+                <li>Education and awareness initiatives</li>
               </ul>
             </div>
-
-            <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-2xl p-8 border border-orange-500/20">
-              <div className="text-4xl mb-4">🔥</div>
-              <h3 className="font-bold text-2xl mb-4 text-orange-400">3. Burn Mechanism</h3>
-              <p className="text-gray-300 mb-4">
-                Deflationary burns reduce supply over time, designed to decrease gradually to avoid long-term instability.
-              </p>
-              <ul className="text-sm text-gray-400 space-y-2">
-                <li>• Deflationary pressure on supply</li>
-                <li>• Capped total burn (max 30%)</li>
-                <li>• Decreasing burn rate over time</li>
+            <div className="engine-card">
+              <div className="engine-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1.5-2.5S8 8.38 8 7a2.5 2.5 0 0 1 5 0"></path></svg></div>
+              <h4>Burn Mechanism</h4>
+              <p>Deflationary burns reduce supply over time. Capped at 30% to prevent instability.</p>
+              <ul className="engine-list">
+                <li>Deflationary pressure on total supply</li>
+                <li>Max burn: 30% of total supply</li>
+                <li>Burn rate decreases over time</li>
               </ul>
             </div>
-
-            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl p-8 border border-purple-500/20">
-              <div className="text-4xl mb-4">🎁</div>
-              <h3 className="font-bold text-2xl mb-4 text-purple-400">4. Rewards Pool</h3>
-              <p className="text-gray-300 mb-4">
-                {PLACEHOLDERS.REWARDS}
-              </p>
-              <ul className="text-sm text-gray-400 space-y-2">
-                <li>• Staking rewards</li>
-                <li>• Lottery pool</li>
-                <li>• Participation incentives</li>
+            <div className="engine-card">
+              <div className="engine-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path></svg></div>
+              <h4>Rewards Pool</h4>
+              <p>Staking and participation incentives for long-term holders.</p>
+              <ul className="engine-list">
+                <li>Staking rewards from fee pool</li>
+                <li>Community lottery pool</li>
+                <li>Participation-based incentives</li>
               </ul>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Ecosystem Alignment (Liquidity Support) */}
-        <section className="mb-16">
-          <div className="bg-gradient-to-br from-base-blue/10 to-accent-500/10 rounded-2xl p-8 border border-base-blue/30">
-            <h2 className="text-3xl font-bold mb-6 gradient-text">Ecosystem Alignment & Liquidity Support</h2>
-            <p className="text-gray-300 text-lg mb-6">
-              {COMPLIANCE.LIQUIDITY_SUPPORT}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-dark-200/50 rounded-xl p-6">
-                <h3 className="font-bold text-lg mb-3 text-base-blue">Who are ecosystem participants?</h3>
-                <p className="text-sm text-gray-400">
-                  Graphene producers, research groups, and stakeholders who hold tokens and have aligned incentives for ecosystem health.
-                </p>
-              </div>
-              <div className="bg-dark-200/50 rounded-xl p-6">
-                <h3 className="font-bold text-lg mb-3 text-accent-400">Why would they contribute?</h3>
-                <p className="text-sm text-gray-400">
-                  As token holders, their success is tied to token stability and ecosystem growth. Healthy liquidity benefits everyone.
-                </p>
-              </div>
-              <div className="bg-dark-200/50 rounded-xl p-6">
-                <h3 className="font-bold text-lg mb-3 text-primary-400">How is it transparent?</h3>
-                <p className="text-sm text-gray-400">
-                  Any discretionary liquidity contributions will be documented on-chain: {PLACEHOLDERS.TREASURY_TRANSPARENCY}
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-6">
-              <p className="text-sm text-gray-300">
-                <strong className="text-yellow-400">Important:</strong> Liquidity contributions are discretionary, not guaranteed, and should not be considered a promise of future support. The ecosystem design philosophy includes aligned incentives, but execution is always at the discretion of participants.
+      <section className="section">
+        <div className="container">
+          <div className="content-grid fade-up">
+            <div>
+              <div className="section-label">Alignment</div>
+              <h2 className="section-title" style={{ textAlign: "left" }}>Ecosystem Alignment &amp; Liquidity</h2>
+              <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: 16 }}>
+                Graphene producers, research groups, and stakeholders who hold tokens have aligned incentives for ecosystem health. Their success is tied to token stability and ecosystem growth.
+              </p>
+              <p style={{ color: "var(--text-secondary)", lineHeight: 1.8 }}>
+                Ecosystem participants may choose to contribute liquidity over time. These contributions are discretionary and documented on-chain — not guaranteed.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* Vesting Design */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center gradient-text">Vesting Design: Claim-on-Demand</h2>
-          <div className="bg-dark-200/50 backdrop-blur-sm rounded-2xl p-8 border border-base-blue/20">
-            <p className="text-gray-300 text-lg mb-6">
-              Unlike many token launches that force daily claims, {PROJECT_CONFIG.TOKEN_SYMBOL} uses a claim-on-demand vesting model. This means:
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-dark-100 rounded-xl p-6">
-                <h3 className="font-bold text-lg mb-3 text-green-400">✓ No daily claims required</h3>
-                <p className="text-sm text-gray-400">Your vested tokens accumulate automatically. Claim when you want, not when forced.</p>
-              </div>
-              <div className="bg-dark-100 rounded-xl p-6">
-                <h3 className="font-bold text-lg mb-3 text-green-400">✓ Gas efficient</h3>
-                <p className="text-sm text-gray-400">Save on transaction fees by claiming less frequently.</p>
-              </div>
-              <div className="bg-dark-100 rounded-xl p-6">
-                <h3 className="font-bold text-lg mb-3 text-green-400">✓ User-friendly</h3>
-                <p className="text-sm text-gray-400">No complex claiming schedules or missed rewards.</p>
-              </div>
-            </div>
-
-            <h3 className="font-bold text-xl mb-4">Vesting Schedules</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-xl p-6 border border-blue-500/20">
-                <h4 className="font-bold mb-2 text-base-blue">Round 1 (R1)</h4>
-                <p className="text-sm text-gray-400 mb-1">{PROJECT_CONFIG.R1_TGE} at TGE</p>
-                <p className="text-sm text-gray-400">{PROJECT_CONFIG.R1_VESTING}</p>
-              </div>
-              <div className="bg-gradient-to-br from-accent-500/10 to-teal-500/10 rounded-xl p-6 border border-accent-500/20">
-                <h4 className="font-bold mb-2 text-accent-400">Round 2 (R2)</h4>
-                <p className="text-sm text-gray-400 mb-1">{PROJECT_CONFIG.R2_TGE} at TGE</p>
-                <p className="text-sm text-gray-400">{PROJECT_CONFIG.R2_VESTING}</p>
-              </div>
-              <div className="bg-gradient-to-br from-primary-500/10 to-purple-500/10 rounded-xl p-6 border border-primary-500/20">
-                <h4 className="font-bold mb-2 text-primary-400">Round 3 (R3)</h4>
-                <p className="text-sm text-gray-400 mb-1">{PROJECT_CONFIG.R3_TGE} at TGE</p>
-                <p className="text-sm text-gray-400">{PROJECT_CONFIG.R3_VESTING}</p>
-              </div>
+            <div className="content-img">
+              <img src="/images/trust-security.jpg" alt="Blockchain trust and security infrastructure" loading="lazy" />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Security & Transparency */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center gradient-text">Security & Transparency</h2>
-          <div className="bg-dark-200/50 backdrop-blur-sm rounded-2xl p-8 border border-base-blue/20">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="font-bold text-xl mb-4 text-green-400">Built-in Safeguards</h3>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>Fixed max supply design</strong> (no infinite minting)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>Hard caps on buy and sell taxes</strong></span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>LP lock design via timelock mechanism</strong></span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>Timelocked governance actions</strong> for sensitive changes</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
-                    <span><strong>Claim-on-demand vesting design</strong></span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-bold text-xl mb-4 text-base-blue">Contract Transparency</h3>
-                <div className="space-y-4">
-                  <div className="bg-dark-100 rounded-xl p-4">
-                    <p className="text-sm text-gray-400 mb-1">Token Contract</p>
-                    <p className="font-mono text-xs text-gray-300 break-all">{PROJECT_CONFIG.TOKEN_CONTRACT_ADDRESS}</p>
-                  </div>
-                  <div className="bg-dark-100 rounded-xl p-4">
-                    <p className="text-sm text-gray-400 mb-1">Sale Contract</p>
-                    <p className="font-mono text-xs text-gray-300 break-all">{PROJECT_CONFIG.SALE_CONTRACT_ADDRESS}</p>
-                  </div>
-                  <a
-                    href={PROJECT_CONFIG.BASE_EXPLORER_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-center py-3 bg-base-blue/10 hover:bg-base-blue/20 border border-base-blue/30 rounded-xl font-semibold transition-all text-base-blue"
-                  >
-                    View on Explorer →
-                  </a>
-                </div>
-              </div>
+      <section className="section section-alt">
+        <div className="container">
+          <div className="section-header fade-up">
+            <div className="section-label">Security</div>
+            <h2 className="section-title">Safety-First Design</h2>
+            <p className="section-desc">Every safeguard is enforced by the smart contract. Not by promises. Not by trust. By code.</p>
+          </div>
+
+          <div className="safety-grid fade-up">
+            <div className="safety-item"><span className="safety-check">✓</span> Fixed max supply — no infinite minting possible</div>
+            <div className="safety-item"><span className="safety-check">✓</span> Hard caps on buy tax (≤3%) and sell tax (≤7%)</div>
+            <div className="safety-item"><span className="safety-check">✓</span> LP timelock mechanism — liquidity can&apos;t be pulled</div>
+            <div className="safety-item"><span className="safety-check">✓</span> Time-delayed governance for sensitive changes</div>
+            <div className="safety-item"><span className="safety-check">✓</span> Claim-on-demand vesting — no forced claims</div>
+            <div className="safety-item"><span className="safety-check">✓</span> Audited by SolidProof before TGE</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-section">
+        <div className="container">
+          <div className="cta-content fade-up">
+            <h2>Ready to Participate?</h2>
+            <p>Review the risks and contracts. Then decide.</p>
+            <div className="hero-actions">
+              <Link href="/presale" className="btn btn-primary" data-burst="true">Join the Presale →</Link>
+              <Link href="/faq" className="btn btn-secondary">FAQ &amp; Due Diligence →</Link>
             </div>
-            <p className="text-sm text-gray-500 text-center mt-8">
-              Even strong safeguards cannot eliminate market risk, contract risk, or regulatory risk.
-            </p>
           </div>
-        </section>
-
-        {/* CTA */}
-        <section className="text-center py-12">
-          <h2 className="text-3xl font-bold mb-4">Ready to participate?</h2>
-          <p className="text-gray-400 mb-6">Review risks and eligibility before purchasing.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/#buy">
-              <button className="px-8 py-4 bg-gradient-to-r from-base-blue to-accent-500 hover:from-base-blue/90 hover:to-accent-600 rounded-xl font-semibold shadow-lg shadow-base-blue/50 hover:shadow-xl hover:shadow-base-blue/60 transition-all duration-300 hover:-translate-y-1">
-                Buy {PROJECT_CONFIG.TOKEN_SYMBOL}
-              </button>
-            </Link>
-            <Link href="/risk">
-              <button className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-base-blue/50 rounded-xl font-semibold backdrop-blur-sm transition-all duration-300 hover:-translate-y-1">
-                Review Risks
-              </button>
-            </Link>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </>
   );
 }

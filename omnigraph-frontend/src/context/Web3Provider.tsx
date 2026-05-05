@@ -1,39 +1,32 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider, createConfig, http } from "wagmi";
-import { base, baseSepolia } from "wagmi/chains";
-import { RainbowKitProvider, getDefaultConfig, darkTheme } from "@rainbow-me/rainbowkit";
-import "@rainbow-me/rainbowkit/styles.css";
+import { useMemo, type FC, type PropsWithChildren } from "react";
+import {
+  ConnectionProvider as RawConnectionProvider,
+  WalletProvider as RawWalletProvider,
+} from "@solana/wallet-adapter-react";
+import { WalletModalProvider as RawWalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { PROJECT_CONFIG } from "@/config/constants";
 
-const config = getDefaultConfig({
-  appName: "Omnigrafx",
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "ff9eca9414dee31f32cdaaedeed38125",
-  chains: [base, baseSepolia],
-  transports: {
-    [base.id]: http(),
-    [baseSepolia.id]: http(),
-  },
-  ssr: true,
-});
+import "@solana/wallet-adapter-react-ui/styles.css";
 
-const queryClient = new QueryClient();
+// @solana/wallet-adapter-react types lag behind React 18.3's stricter FC return-type.
+// Re-cast to plain FCs to satisfy JSX without giving up prop typing.
+const ConnectionProvider = RawConnectionProvider as unknown as FC<PropsWithChildren<{ endpoint: string }>>;
+const WalletProvider = RawWalletProvider as unknown as FC<PropsWithChildren<{ wallets: any[]; autoConnect?: boolean }>>;
+const WalletModalProvider = RawWalletModalProvider as unknown as FC<PropsWithChildren<{}>>;
 
 export function Web3Provider({ children }: { children: React.ReactNode }) {
+  const endpoint = PROJECT_CONFIG.SOLANA_RPC;
+  // Empty array — Phantom, Backpack, Solflare, etc. register automatically via Wallet Standard.
+  // Avoids importing the umbrella @solana/wallet-adapter-wallets package which has ESM/CJS issues with Ledger.
+  const wallets = useMemo(() => [], []);
+
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider
-          theme={darkTheme({
-            accentColor: "#0ea5e9",
-            accentColorForeground: "white",
-            borderRadius: "large",
-            fontStack: "system",
-          })}
-        >
-          {children}
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>{children}</WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
   );
 }
