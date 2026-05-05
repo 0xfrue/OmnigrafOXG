@@ -16,11 +16,21 @@ const ConnectionProvider = RawConnectionProvider as unknown as FC<PropsWithChild
 const WalletProvider = RawWalletProvider as unknown as FC<PropsWithChildren<{ wallets: any[]; autoConnect?: boolean }>>;
 const WalletModalProvider = RawWalletModalProvider as unknown as FC<PropsWithChildren<{}>>;
 
+const DEFAULT_RPC = "https://api.mainnet-beta.solana.com";
+
+// Solana's Connection ctor throws if endpoint isn't http(s)://. Stale/empty/invalid
+// env values would crash the page — fall back to mainnet-beta if anything's off.
+function safeRpcEndpoint(raw: string | undefined): string {
+  if (!raw) return DEFAULT_RPC;
+  if (!/^https?:\/\//i.test(raw)) return DEFAULT_RPC;
+  return raw;
+}
+
 export function Web3Provider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const endpoint = PROJECT_CONFIG.SOLANA_RPC;
+  const endpoint = safeRpcEndpoint(PROJECT_CONFIG.SOLANA_RPC);
   // Empty array — Phantom, Backpack, Solflare, etc. register automatically via Wallet Standard.
   const wallets = useMemo(() => [], []);
 

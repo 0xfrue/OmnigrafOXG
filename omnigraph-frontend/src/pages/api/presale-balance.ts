@@ -9,9 +9,16 @@ function toPubkey(addr: string | undefined, fallback: string): PublicKey {
   try { return new PublicKey(addr || fallback); } catch { return new PublicKey(fallback); }
 }
 
+const DEFAULT_RPC = "https://api.mainnet-beta.solana.com";
+
+function safeRpc(raw: string | undefined): string {
+  if (!raw || !/^https?:\/\//i.test(raw)) return DEFAULT_RPC;
+  return raw;
+}
+
 const PRESALE_WALLET = toPubkey(process.env.NEXT_PUBLIC_PRESALE_WALLET, DEFAULT_PRESALE_WALLET);
 const USDC_MINT = toPubkey(process.env.NEXT_PUBLIC_USDC_MINT, DEFAULT_USDC_MINT);
-const RPC = process.env.NEXT_PUBLIC_SOLANA_RPC || "https://api.mainnet-beta.solana.com";
+const RPC = safeRpc(process.env.NEXT_PUBLIC_SOLANA_RPC);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
