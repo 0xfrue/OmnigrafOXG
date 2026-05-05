@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -39,6 +39,14 @@ const USDC_DECIMALS = 6;
 
 type PaymentToken = "USDC" | "SOL";
 type TxStatus = "idle" | "sending" | "success" | "error";
+
+// Renders children only after client hydration. Prevents Solana wallet hooks
+// (useConnection, useWallet) from throwing during Next.js SSR/static export.
+function ClientOnly({ children, fallback = null }: { children: React.ReactNode; fallback?: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return <>{mounted ? children : fallback}</>;
+}
 
 function BuySection() {
   const { connection } = useConnection();
@@ -342,7 +350,15 @@ export default function PresalePage() {
 
             <LiveBalance />
 
-            <BuySection />
+            <ClientOnly
+              fallback={
+                <p className="presale-sub" style={{ marginTop: 0, textAlign: "center" }}>
+                  Loading wallet…
+                </p>
+              }
+            >
+              <BuySection />
+            </ClientOnly>
           </div>
 
           <div style={{ maxWidth: 560, margin: "32px auto 0", textAlign: "center" }}>

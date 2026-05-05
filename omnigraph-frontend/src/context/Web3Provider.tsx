@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, type FC, type PropsWithChildren } from "react";
+import { useEffect, useMemo, useState, type FC, type PropsWithChildren } from "react";
 import {
   ConnectionProvider as RawConnectionProvider,
   WalletProvider as RawWalletProvider,
@@ -17,10 +17,16 @@ const WalletProvider = RawWalletProvider as unknown as FC<PropsWithChildren<{ wa
 const WalletModalProvider = RawWalletModalProvider as unknown as FC<PropsWithChildren<{}>>;
 
 export function Web3Provider({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const endpoint = PROJECT_CONFIG.SOLANA_RPC;
   // Empty array — Phantom, Backpack, Solflare, etc. register automatically via Wallet Standard.
-  // Avoids importing the umbrella @solana/wallet-adapter-wallets package which has ESM/CJS issues with Ledger.
   const wallets = useMemo(() => [], []);
+
+  // Skip the wallet provider stack on server. ConnectionProvider's useMemo
+  // calls new Connection() which doesn't survive Next.js static export.
+  if (!mounted) return <>{children}</>;
 
   return (
     <ConnectionProvider endpoint={endpoint}>
