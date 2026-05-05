@@ -2,12 +2,15 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { getAssociatedTokenAddress } from "@solana/spl-token";
 
-const PRESALE_WALLET = new PublicKey(
-  process.env.NEXT_PUBLIC_PRESALE_WALLET || "663atiZucS388vR1i1p7vQAt5EHtLLMxf885FVLJmkgf"
-);
-const USDC_MINT = new PublicKey(
-  process.env.NEXT_PUBLIC_USDC_MINT || "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
-);
+const DEFAULT_PRESALE_WALLET = "663atiZucS388vR1i1p7vQAt5EHtLLMxf885FVLJmkgf";
+const DEFAULT_USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
+
+function toPubkey(addr: string | undefined, fallback: string): PublicKey {
+  try { return new PublicKey(addr || fallback); } catch { return new PublicKey(fallback); }
+}
+
+const PRESALE_WALLET = toPubkey(process.env.NEXT_PUBLIC_PRESALE_WALLET, DEFAULT_PRESALE_WALLET);
+const USDC_MINT = toPubkey(process.env.NEXT_PUBLIC_USDC_MINT, DEFAULT_USDC_MINT);
 const RPC = process.env.NEXT_PUBLIC_SOLANA_RPC || "https://api.mainnet-beta.solana.com";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

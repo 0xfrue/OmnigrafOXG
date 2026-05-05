@@ -25,8 +25,16 @@ const WalletMultiButton = dynamic(
   { ssr: false }
 );
 
-const PRESALE_WALLET = new PublicKey(PROJECT_CONFIG.SALE_CONTRACT_ADDRESS);
-const USDC_MINT = new PublicKey(PROJECT_CONFIG.USDC_MINT);
+// Hardcoded Solana defaults — used if a non-base58 env var (stale EVM hex) overrides PROJECT_CONFIG
+const DEFAULT_PRESALE_WALLET = "663atiZucS388vR1i1p7vQAt5EHtLLMxf885FVLJmkgf";
+const DEFAULT_USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
+
+function toPubkey(addr: string, fallback: string): PublicKey {
+  try { return new PublicKey(addr); } catch { return new PublicKey(fallback); }
+}
+
+const PRESALE_WALLET = toPubkey(PROJECT_CONFIG.SALE_CONTRACT_ADDRESS, DEFAULT_PRESALE_WALLET);
+const USDC_MINT = toPubkey(PROJECT_CONFIG.USDC_MINT, DEFAULT_USDC_MINT);
 const USDC_DECIMALS = 6;
 
 type PaymentToken = "USDC" | "SOL";
