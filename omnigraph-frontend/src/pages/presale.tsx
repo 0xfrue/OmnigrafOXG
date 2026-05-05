@@ -155,15 +155,14 @@ function BuySection() {
           </div>
         </div>
 
-        <a
-          href={`https://solscan.io/account/${PROJECT_CONFIG.SALE_CONTRACT_ADDRESS}`}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          disabled
           className="btn btn-secondary"
-          style={{ width: "100%", marginBottom: 16 }}
+          style={{ width: "100%", marginBottom: 16, cursor: "not-allowed" }}
         >
-          View on Solscan →
-        </a>
+          View on Solscan (coming soon)
+        </button>
 
         <div style={{ borderTop: "1px solid var(--border-subtle)", paddingTop: 20, textAlign: "center" }}>
           <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", marginBottom: 12 }}>
@@ -190,15 +189,10 @@ function BuySection() {
           <div className="pi-label">Estimated tokens</div>
           <div className="pi-value">{estimatedTokens} GRAF</div>
         </div>
-        <a
-          href={`https://solscan.io/tx/${txSig}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-secondary"
-          style={{ width: "100%", marginBottom: 12 }}
-        >
-          View Transaction →
-        </a>
+        <div className="tx-info" style={{ marginBottom: 12, fontFamily: "var(--font-mono)", fontSize: "0.75rem", wordBreak: "break-all", textAlign: "left" }}>
+          <div style={{ fontSize: "0.7rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>Transaction Signature</div>
+          {txSig}
+        </div>
         <button onClick={reset} className="btn btn-secondary" style={{ width: "100%" }}>
           Make Another Contribution
         </button>

@@ -93,18 +93,18 @@ export default function Home() {
           </div>
 
           <div className="hero-trust-row">
-            <a href="https://app.solidproof.io/projects/omnigraf" target="_blank" rel="noopener noreferrer" className="hero-trust-link">
+            <span className="hero-trust-link" style={{ cursor: "default" }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: "-2px", marginRight: "4px" }}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
               Audited by SolidProof
-            </a>
-            <a href="https://uncx.network/" target="_blank" rel="noopener noreferrer" className="hero-trust-link">
+            </span>
+            <span className="hero-trust-link" style={{ cursor: "default" }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: "-2px", marginRight: "4px" }}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
               LP Locked 24mo via UNCX
-            </a>
-            <a href="https://solscan.io/account/0x7A329d5A159f4025ddCfB1a78aE3809Fa824659c" target="_blank" rel="noopener noreferrer" className="hero-trust-link">
+            </span>
+            <span className="hero-trust-link" style={{ cursor: "default" }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: "-2px", marginRight: "4px" }}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
               View Contract on Solscan
-            </a>
+            </span>
           </div>
         </div>
       </section>
