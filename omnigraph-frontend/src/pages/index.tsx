@@ -2,9 +2,7 @@
 
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
-const PRESALE_START = new Date("2026-05-05T12:00:00");
+import { useEffect } from "react";
 
 function useFadeUp() {
   useEffect(() => {
@@ -22,42 +20,6 @@ function useFadeUp() {
     document.querySelectorAll(".fade-up").forEach((el) => obs.observe(el));
     return () => obs.disconnect();
   }, []);
-}
-
-function Countdown() {
-  const [t, setT] = useState({ d: "--", h: "--", m: "--", s: "--" });
-  useEffect(() => {
-    const tick = () => {
-      const diff = PRESALE_START.getTime() - Date.now();
-      if (diff <= 0) {
-        setT({ d: "00", h: "00", m: "00", s: "00" });
-        return;
-      }
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      const pad = (n: number) => String(n).padStart(2, "0");
-      setT({ d: pad(d), h: pad(h), m: pad(m), s: pad(s) });
-    };
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return (
-    <div className="presale-countdown fade-up">
-      <div className="countdown-label">Presale Opens In</div>
-      <div className="countdown-timer">
-        <div className="countdown-unit"><span>{t.d}</span><small>Days</small></div>
-        <div className="countdown-sep">:</div>
-        <div className="countdown-unit"><span>{t.h}</span><small>Hours</small></div>
-        <div className="countdown-sep">:</div>
-        <div className="countdown-unit"><span>{t.m}</span><small>Min</small></div>
-        <div className="countdown-sep">:</div>
-        <div className="countdown-unit"><span>{t.s}</span><small>Sec</small></div>
-      </div>
-    </div>
-  );
 }
 
 export default function Home() {
@@ -84,8 +46,6 @@ export default function Home() {
             $GRAF is the payment token for the graphene economy — used by distributors, vendors, buyers, and sellers across the supply chain. Backed by industry leaders who build with it, trade with it, and support it. Fixed supply. No mint function. When the presale closes, this price is gone.{" "}
             <Link href="/tokenomics" style={{ color: "var(--accent-cyan)", borderBottom: "1px solid var(--accent-cyan)" }}>84% locked at launch.</Link>
           </p>
-
-          <Countdown />
 
           <div className="hero-actions">
             <Link href="/presale" className="btn btn-primary" data-burst="true">Reserve Your Allocation →</Link>
